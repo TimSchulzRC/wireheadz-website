@@ -1,5 +1,6 @@
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
+import { PrismicText } from "@prismicio/react";
 import dayjs from "dayjs";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
@@ -62,7 +63,9 @@ export default function EventCard({ event }: { event: Content.EventDocument }) {
         </div>
         <CardHeader>
           <div className="flex justify-between items-start">
-            <CardTitle>{event.data.title}</CardTitle>
+            <CardTitle>
+              <PrismicText field={event.data.title} />
+            </CardTitle>
           </div>
         </CardHeader>
         <CardContent className="flex-1 space-y-2">

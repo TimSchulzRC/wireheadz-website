@@ -1,4 +1,6 @@
+import Section from "@/components/section";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Content, isFilled } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
@@ -15,16 +17,24 @@ export type TextWithImageProps =
  */
 const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
   return (
-    <section
+    <Section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="container my-24"
     >
-      <div className="mt-16 bg-muted/50 rounded-lg p-8">
-        <div className="flex flex-col md:flex-row gap-8 items-center">
+      <div className="bg-muted/50 rounded-lg p-12">
+        <div
+          className={cn(
+            "flex flex-col gap-24 items-center",
+            slice.variation === "default"
+              ? "md:flex-row"
+              : "md:flex-row-reverse"
+          )}
+        >
           <div className="md:w-1/2">
             {isFilled.richText(slice.primary.text) && (
-              <PrismicRichText field={slice.primary.text} />
+              <div className="mb-6">
+                <PrismicRichText field={slice.primary.text} />
+              </div>
             )}
             {slice.primary.links?.length > 0 &&
               slice.primary.links.map((item) => (
@@ -35,12 +45,15 @@ const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
                 </Button>
               ))}
           </div>
-          <div className="md:w-1/2">
-            <PrismicNextImage field={slice.primary.image} />
+          <div className="md:w-1/2 ">
+            <PrismicNextImage
+              field={slice.primary.image}
+              className="rounded-lg aspect-square object-cover h-full w-full"
+            />
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 

@@ -3,24 +3,14 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
 		"primary": {
-			"titel": {
-				"__TYPE__": "FieldContent",
-				"value": "thy",
-				"type": "Text"
-			},
-			"subtitel": {
-				"__TYPE__": "FieldContent",
-				"value": "headed",
-				"type": "Text"
-			},
 			"title": {
 				"__TYPE__": "FieldContent",
-				"value": "practical",
+				"value": "railroad",
 				"type": "Text"
 			},
 			"subtitle": {
 				"__TYPE__": "FieldContent",
-				"value": "eat",
+				"value": "ill",
 				"type": "Text"
 			}
 		},

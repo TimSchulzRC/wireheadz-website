@@ -13,13 +13,13 @@ interface EventDocumentData {
   /**
    * Title field in *Event*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: event.title
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  title: prismic.KeyTextField;
+  title: prismic.RichTextField;
 
   /**
    * Description field in *Event*
@@ -198,7 +198,10 @@ export type EventsOverviewPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = TextWithImageSlice | EventsSlice;
+type HomepageDocumentDataSlicesSlice =
+  | CustomerLogosSlice
+  | TextWithImageSlice
+  | EventsSlice;
 
 /**
  * Content for Homepage documents
@@ -304,6 +307,104 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
+type LeistungDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Leistung documents
+ */
+interface LeistungDocumentData {
+  /**
+   * Title field in *Leistung*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistung.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Leistung*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistung.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Content field in *Leistung*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistung.content
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *Leistung*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistung.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<LeistungDocumentDataSlicesSlice> /**
+   * Meta Title field in *Leistung*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: leistung.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Leistung*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: leistung.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Leistung*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistung.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Leistung document from Prismic
+ *
+ * - **API ID**: `leistung`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type LeistungDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<LeistungDocumentData>,
+    "leistung",
+    Lang
+  >;
+
 type PageDocumentDataSlicesSlice = never;
 
 /**
@@ -380,7 +481,115 @@ export type AllDocumentTypes =
   | EventDocument
   | EventsOverviewPageDocument
   | HomepageDocument
+  | LeistungDocument
   | PageDocument;
+
+/**
+ * Item in *Sponsors → Default → Primary → logos*
+ */
+export interface CustomerLogosSliceDefaultPrimaryLogosItem {
+  /**
+   * Image field in *Sponsors → Default → Primary → logos*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.default.primary.logos[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Link field in *Sponsors → Default → Primary → logos*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.default.primary.logos[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *Sponsors → Default → Primary*
+ */
+export interface CustomerLogosSliceDefaultPrimary {
+  /**
+   * Title field in *Sponsors → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * logos field in *Sponsors → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: customer_logos.default.primary.logos[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  logos: prismic.GroupField<
+    Simplify<CustomerLogosSliceDefaultPrimaryLogosItem>
+  >;
+}
+
+/**
+ * Default variation for Sponsors Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CustomerLogosSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CustomerLogosSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Sponsors*
+ */
+type CustomerLogosSliceVariation = CustomerLogosSliceDefault;
+
+/**
+ * Sponsors Shared Slice
+ *
+ * - **API ID**: `customer_logos`
+ * - **Description**: CustomerLogos
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CustomerLogosSlice = prismic.SharedSlice<
+  "customer_logos",
+  CustomerLogosSliceVariation
+>;
+
+/**
+ * Primary content in *Events → Default → Primary*
+ */
+export interface EventsSliceDefaultPrimary {
+  /**
+   * Title field in *Events → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: events.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *Events → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: events.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+}
 
 /**
  * Default variation for Events Slice
@@ -391,7 +600,7 @@ export type AllDocumentTypes =
  */
 export type EventsSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<EventsSliceDefaultPrimary>,
   never
 >;
 
@@ -408,6 +617,61 @@ type EventsSliceVariation = EventsSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type EventsSlice = prismic.SharedSlice<"events", EventsSliceVariation>;
+
+/**
+ * Primary content in *Leistungen → Default → Primary*
+ */
+export interface LeistungenSliceDefaultPrimary {
+  /**
+   * Title field in *Leistungen → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistungen.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *Leistungen → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistungen.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Leistungen Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LeistungenSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LeistungenSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Leistungen*
+ */
+type LeistungenSliceVariation = LeistungenSliceDefault;
+
+/**
+ * Leistungen Shared Slice
+ *
+ * - **API ID**: `leistungen`
+ * - **Description**: Leistungen
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LeistungenSlice = prismic.SharedSlice<
+  "leistungen",
+  LeistungenSliceVariation
+>;
 
 /**
  * Primary content in *TextWithImage → ImageRight → Primary*
@@ -570,13 +834,26 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      LeistungDocument,
+      LeistungDocumentData,
+      LeistungDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      CustomerLogosSlice,
+      CustomerLogosSliceDefaultPrimaryLogosItem,
+      CustomerLogosSliceDefaultPrimary,
+      CustomerLogosSliceVariation,
+      CustomerLogosSliceDefault,
       EventsSlice,
+      EventsSliceDefaultPrimary,
       EventsSliceVariation,
       EventsSliceDefault,
+      LeistungenSlice,
+      LeistungenSliceDefaultPrimary,
+      LeistungenSliceVariation,
+      LeistungenSliceDefault,
       TextWithImageSlice,
       TextWithImageSliceDefaultPrimary,
       TextWithImageSliceImageLeftPrimary,

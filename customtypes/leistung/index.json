@@ -1,59 +1,45 @@
 {
-  "id": "homepage",
-  "label": "Homepage",
-  "repeatable": false,
-  "status": true,
   "format": "page",
+  "id": "leistung",
+  "label": "Leistung",
+  "repeatable": true,
+  "status": true,
   "json": {
     "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
       "title": {
         "type": "Text",
         "config": {
           "label": "Title",
-          "placeholder": "WireHeadZ Games Hub"
+          "placeholder": ""
         }
       },
-      "subtitle": {
+      "description": {
         "type": "Text",
         "config": {
-          "label": "Subtitle",
-          "placeholder": "WHZ eSports ist mehr als nur Gaming."
+          "label": "Description",
+          "placeholder": ""
         }
       },
-      "links": {
-        "type": "Link",
+      "content": {
+        "type": "StructuredText",
         "config": {
-          "label": "Links",
+          "label": "Content",
           "placeholder": "",
-          "select": null,
           "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true,
-          "variants": [
-            "link",
-            "secondary",
-            "destructive",
-            "outline",
-            "ghost",
-            "default"
-          ]
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {
-            "customer_logos": {
-              "type": "SharedSlice"
-            },
-            "text_with_image": {
-              "type": "SharedSlice"
-            },
-            "events": {
-              "type": "SharedSlice"
-            }
-          }
+          "choices": {}
         }
       }
     },
