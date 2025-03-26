@@ -26,11 +26,13 @@
           "placeholder": ""
         }
       },
-      "subtitle": {
-        "type": "Text",
+      "description": {
+        "type": "StructuredText",
         "config": {
-          "label": "Subtitle",
-          "placeholder": ""
+          "label": "Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading3,heading4,heading5,heading6,strong,em,hyperlink,list-item,o-list-item,rtl,heading2"
         }
       },
       "header_image": {
@@ -46,6 +48,24 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "team_info": {
+              "type": "SharedSlice"
+            },
+            "text_with_image": {
+              "type": "SharedSlice"
+            },
+            "customer_logos": {
+              "type": "SharedSlice"
+            },
+            "leistungen": {
+              "type": "SharedSlice"
+            },
+            "rich_text": {
+              "type": "SharedSlice"
+            },
+            "events": {
+              "type": "SharedSlice"
+            },
             "team": {
               "type": "SharedSlice"
             }

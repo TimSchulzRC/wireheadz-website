@@ -1,5 +1,5 @@
 import { asImageSrc, isFilled } from "@prismicio/client";
-import { SliceZone } from "@prismicio/react";
+import { PrismicRichText, SliceZone } from "@prismicio/react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -24,7 +24,6 @@ export default async function Page({ params }: { params: Promise<Params> }) {
             field={data.header_image}
             className="object-cover w-full h-full"
           />
-
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
           <div className="absolute bottom-0 left-0 p-6 md:p-8">
             <Badge className="mb-2 bg-secondary text-secondary-foreground">
@@ -35,14 +34,11 @@ export default async function Page({ params }: { params: Promise<Params> }) {
                 {data.title}
               </h1>
             )}
-            {isFilled.keyText(data.subtitle) && (
-              <p className="max-w-[600px] text-muted-foreground md:text-lg">
-                {data.subtitle}
-              </p>
+            {isFilled.richText(data.description) && (
+              <div className="max-w-[600px] text-muted-foreground md:text-lg rtf">
+                <PrismicRichText field={data.description} />
+              </div>
             )}
-            <p className="max-w-[600px] text-muted-foreground md:text-lg">
-              {data.subtitle}
-            </p>
           </div>
         </div>
       </Section>

@@ -98,10 +98,6 @@
   }
 }
 
-p {
-  margin-bottom: 1rem;
-}
-
 h1 {
   @apply text-7xl;
 }
@@ -133,4 +129,16 @@ h6 {
 .rtf h5,
 .rtf h6 {
   @apply mb-6;
+}
+
+.rtf ul {
+  @apply list-disc pl-6;
+}
+
+.rtf ol {
+  @apply list-decimal pl-6;
+}
+
+.rtf li {
+  @apply mb-2;
 }

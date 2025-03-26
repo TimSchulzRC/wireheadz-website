@@ -84,7 +84,7 @@ export default function EventCard({ event }: { event: Content.EventDocument }) {
           </div>
         )}
         {isFilled.keyText(data.description) && (
-          <p className="prose prose-slate prose-invert mt-2">
+          <p className="prose prose-slate prose-invert mt-6">
             {data.description}
           </p>
         )}

@@ -198,7 +198,14 @@ export type EventsOverviewPageDocument<Lang extends string = string> =
     Lang
   >;
 
-type GameDocumentDataSlicesSlice = TeamSlice;
+type GameDocumentDataSlicesSlice =
+  | TeamInfoSlice
+  | TextWithImageSlice
+  | CustomerLogosSlice
+  | LeistungenSlice
+  | RichTextSlice
+  | EventsSlice
+  | TeamSlice;
 
 /**
  * Content for Game documents
@@ -227,15 +234,15 @@ interface GameDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Subtitle field in *Game*
+   * Description field in *Game*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: game.subtitle
+   * - **API ID Path**: game.description
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  subtitle: prismic.KeyTextField;
+  description: prismic.RichTextField;
 
   /**
    * Header Image field in *Game*
@@ -755,6 +762,33 @@ type EventsSliceVariation = EventsSliceDefault;
 export type EventsSlice = prismic.SharedSlice<"events", EventsSliceVariation>;
 
 /**
+ * Default variation for Games Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GamesSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *Games*
+ */
+type GamesSliceVariation = GamesSliceDefault;
+
+/**
+ * Games Shared Slice
+ *
+ * - **API ID**: `games`
+ * - **Description**: Games
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type GamesSlice = prismic.SharedSlice<"games", GamesSliceVariation>;
+
+/**
  * Primary content in *Leistungen → Default → Primary*
  */
 export interface LeistungenSliceDefaultPrimary {
@@ -992,6 +1026,61 @@ type TeamSliceVariation = TeamSliceDefault;
 export type TeamSlice = prismic.SharedSlice<"team", TeamSliceVariation>;
 
 /**
+ * Primary content in *TeamInfo → Default → Primary*
+ */
+export interface TeamInfoSliceDefaultPrimary {
+  /**
+   * Content field in *TeamInfo → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_info.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+
+  /**
+   * Team Foto field in *TeamInfo → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_info.default.primary.team_foto
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  team_foto: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for TeamInfo Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamInfoSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamInfoSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TeamInfo*
+ */
+type TeamInfoSliceVariation = TeamInfoSliceDefault;
+
+/**
+ * TeamInfo Shared Slice
+ *
+ * - **API ID**: `team_info`
+ * - **Description**: TeamInfo
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamInfoSlice = prismic.SharedSlice<
+  "team_info",
+  TeamInfoSliceVariation
+>;
+
+/**
  * Primary content in *TextWithImage → ImageRight → Primary*
  */
 export interface TextWithImageSliceDefaultPrimary {
@@ -1193,6 +1282,9 @@ declare module "@prismicio/client" {
       EventsSliceDefaultPrimary,
       EventsSliceVariation,
       EventsSliceDefault,
+      GamesSlice,
+      GamesSliceVariation,
+      GamesSliceDefault,
       LeistungenSlice,
       LeistungenSliceDefaultPrimary,
       LeistungenSliceVariation,
@@ -1206,6 +1298,10 @@ declare module "@prismicio/client" {
       TeamSliceDefaultPrimary,
       TeamSliceVariation,
       TeamSliceDefault,
+      TeamInfoSlice,
+      TeamInfoSliceDefaultPrimary,
+      TeamInfoSliceVariation,
+      TeamInfoSliceDefault,
       TextWithImageSlice,
       TextWithImageSliceDefaultPrimary,
       TextWithImageSliceImageLeftPrimary,
