@@ -48,13 +48,16 @@ const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
                 </div>
               )}
               {slice.primary.links?.length > 0 &&
-                slice.primary.links.map((item) => (
-                  <Button asChild key={item.key}>
-                    <PrismicNextLink field={item}>
-                      Kontakt aufnehmen
-                    </PrismicNextLink>
-                  </Button>
-                ))}
+                slice.primary.links.map(
+                  (item) =>
+                    isFilled.link(item) && (
+                      <Button asChild key={item.key}>
+                        <PrismicNextLink field={item}>
+                          {item.text}
+                        </PrismicNextLink>
+                      </Button>
+                    )
+                )}
             </div>
             <div className="md:w-1/2 ">
               <PrismicNextImage
