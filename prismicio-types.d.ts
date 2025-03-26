@@ -198,6 +198,111 @@ export type EventsOverviewPageDocument<Lang extends string = string> =
     Lang
   >;
 
+type GameDocumentDataSlicesSlice = TeamSlice;
+
+/**
+ * Content for Game documents
+ */
+interface GameDocumentData {
+  /**
+   * Game field in *Game*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: game.game
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  game: prismic.KeyTextField;
+
+  /**
+   * Title field in *Game*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: game.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *Game*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: game.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Header Image field in *Game*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: game.header_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  header_image: prismic.ImageField<never>;
+
+  /**
+   * Slice Zone field in *Game*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: game.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<GameDocumentDataSlicesSlice> /**
+   * Meta Title field in *Game*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: game.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Game*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: game.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Game*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: game.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Game document from Prismic
+ *
+ * - **API ID**: `game`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type GameDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<GameDocumentData>, "game", Lang>;
+
 type HomepageDocumentDataSlicesSlice =
   | LeistungenSlice
   | CustomerLogosSlice
@@ -500,6 +605,7 @@ export type PageDocument<Lang extends string = string> =
 export type AllDocumentTypes =
   | EventDocument
   | EventsOverviewPageDocument
+  | GameDocument
   | HomepageDocument
   | LeistungDocument
   | PageDocument;
@@ -649,21 +755,6 @@ type EventsSliceVariation = EventsSliceDefault;
 export type EventsSlice = prismic.SharedSlice<"events", EventsSliceVariation>;
 
 /**
- * Item in *Leistungen → Default → Primary → Leistungen*
- */
-export interface LeistungenSliceDefaultPrimaryLeistungenItem {
-  /**
-   * Leistung field in *Leistungen → Default → Primary → Leistungen*
-   *
-   * - **Field Type**: Content Relationship
-   * - **Placeholder**: *None*
-   * - **API ID Path**: leistungen.default.primary.leistungen[].leistung
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  leistung: prismic.ContentRelationshipField<"page">;
-}
-
-/**
  * Primary content in *Leistungen → Default → Primary*
  */
 export interface LeistungenSliceDefaultPrimary {
@@ -686,18 +777,6 @@ export interface LeistungenSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   subtitle: prismic.KeyTextField;
-
-  /**
-   * Leistungen field in *Leistungen → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: leistungen.default.primary.leistungen[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  leistungen: prismic.GroupField<
-    Simplify<LeistungenSliceDefaultPrimaryLeistungenItem>
-  >;
 
   /**
    * Background Color field in *Leistungen → Default → Primary*
@@ -784,6 +863,133 @@ export type RichTextSlice = prismic.SharedSlice<
   "rich_text",
   RichTextSliceVariation
 >;
+
+/**
+ * Item in *TeamRoaster → Default → Primary → Players*
+ */
+export interface TeamSliceDefaultPrimaryPlayersItem {
+  /**
+   * Portrait field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Name field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Gamer Tag field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].gamer_tag
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  gamer_tag: prismic.KeyTextField;
+
+  /**
+   * Studienfach field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].studienfach
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  studienfach: prismic.KeyTextField;
+
+  /**
+   * Peak Rank field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].peak_rank
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  peak_rank: prismic.KeyTextField;
+
+  /**
+   * Lieblings Agent field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].lieblings_agent
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  lieblings_agent: prismic.KeyTextField;
+
+  /**
+   * Zitat field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].zitat
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  zitat: prismic.KeyTextField;
+
+  /**
+   * Role field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].role
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  role: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *TeamRoaster → Default → Primary*
+ */
+export interface TeamSliceDefaultPrimary {
+  /**
+   * Players field in *TeamRoaster → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  players: prismic.GroupField<Simplify<TeamSliceDefaultPrimaryPlayersItem>>;
+}
+
+/**
+ * Default variation for TeamRoaster Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *TeamRoaster*
+ */
+type TeamSliceVariation = TeamSliceDefault;
+
+/**
+ * TeamRoaster Shared Slice
+ *
+ * - **API ID**: `team`
+ * - **Description**: Team
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSlice = prismic.SharedSlice<"team", TeamSliceVariation>;
 
 /**
  * Primary content in *TextWithImage → ImageRight → Primary*
@@ -965,6 +1171,9 @@ declare module "@prismicio/client" {
       EventsOverviewPageDocument,
       EventsOverviewPageDocumentData,
       EventsOverviewPageDocumentDataSlicesSlice,
+      GameDocument,
+      GameDocumentData,
+      GameDocumentDataSlicesSlice,
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
@@ -985,7 +1194,6 @@ declare module "@prismicio/client" {
       EventsSliceVariation,
       EventsSliceDefault,
       LeistungenSlice,
-      LeistungenSliceDefaultPrimaryLeistungenItem,
       LeistungenSliceDefaultPrimary,
       LeistungenSliceVariation,
       LeistungenSliceDefault,
@@ -993,6 +1201,11 @@ declare module "@prismicio/client" {
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
       RichTextSliceDefault,
+      TeamSlice,
+      TeamSliceDefaultPrimaryPlayersItem,
+      TeamSliceDefaultPrimary,
+      TeamSliceVariation,
+      TeamSliceDefault,
       TextWithImageSlice,
       TextWithImageSliceDefaultPrimary,
       TextWithImageSliceImageLeftPrimary,

@@ -7,5 +7,6 @@ export const components = {
   events: dynamic(() => import("./Events")),
   leistungen: dynamic(() => import("./Leistungen")),
   rich_text: dynamic(() => import("./RichText")),
+  team: dynamic(() => import("./TeamRoaster")),
   text_with_image: dynamic(() => import("./TextWithImage")),
 };

@@ -1,0 +1,85 @@
+{
+  "id": "team",
+  "type": "SharedSlice",
+  "name": "TeamRoaster",
+  "description": "Team",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "players": {
+          "type": "Group",
+          "config": {
+            "label": "Players",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Portrait",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name",
+                  "placeholder": ""
+                }
+              },
+              "gamer_tag": {
+                "type": "Text",
+                "config": {
+                  "label": "Gamer Tag",
+                  "placeholder": ""
+                }
+              },
+              "studienfach": {
+                "type": "Text",
+                "config": {
+                  "label": "Studienfach",
+                  "placeholder": ""
+                }
+              },
+              "peak_rank": {
+                "type": "Text",
+                "config": {
+                  "label": "Peak Rank",
+                  "placeholder": ""
+                }
+              },
+              "lieblings_agent": {
+                "type": "Text",
+                "config": {
+                  "label": "Lieblings Agent",
+                  "placeholder": ""
+                }
+              },
+              "zitat": {
+                "type": "Text",
+                "config": {
+                  "label": "Zitat",
+                  "placeholder": ""
+                }
+              },
+              "role": {
+                "type": "Text",
+                "config": {
+                  "label": "Role",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

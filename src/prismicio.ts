@@ -24,6 +24,7 @@ const routes: Route[] = [
   { type: "page", path: "/:uid" },
   { type: "leistung", path: "/leistungen/:uid" },
   { type: "event", path: "/events/:uid" },
+  { type: "game", path: "/games/:uid" },
 ];
 
 /**

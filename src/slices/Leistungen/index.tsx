@@ -25,13 +25,7 @@ export type LeistungenProps = SliceComponentProps<Content.LeistungenSlice>;
  */
 const Leistungen: FC<LeistungenProps> = async ({ slice }) => {
   const client = createClient();
-  const leistungen = await Promise.all(
-    slice.primary.leistungen.map(async (item) => {
-      if (isFilled.contentRelationship(item.leistung)) {
-        return await client.getByID<Content.LeistungDocument>(item.leistung.id);
-      }
-    })
-  );
+  const leistungen = await client.getAllByType("leistung");
 
   return (
     <div
