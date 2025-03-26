@@ -44,11 +44,11 @@ const Events: FC<EventsProps> = async ({ slice }) => {
             <EventCard key={event.id} event={event} />
           ))}
         </div>
-        <Link href="/events">
-          <Button variant="default" size="lg">
-            Alle Events
+        <div className="flex justify-center">
+          <Button asChild variant="outline">
+            <Link href="/events">Alle News anzeigen</Link>
           </Button>
-        </Link>
+        </div>
       </div>
     </Section>
   );

@@ -27,6 +27,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "rich_text": {
+              "type": "SharedSlice"
+            },
+            "games": {
+              "type": "SharedSlice"
+            },
             "customer_logos": {
               "type": "SharedSlice"
             },

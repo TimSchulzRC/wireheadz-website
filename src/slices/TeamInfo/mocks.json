@@ -15,7 +15,6 @@
 				]
 			},
 			"team_foto": {
-				"__TYPE__": "ImageContent",
 				"origin": {
 					"id": "main",
 					"url": "https://images.unsplash.com/photo-1537498425277-c283d32ef9db",
@@ -34,7 +33,14 @@
 					"background": "transparent"
 				},
 				"alt": "high",
+				"credits": null,
+				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "symbol",
+				"type": "Text"
 			}
 		},
 		"items": []

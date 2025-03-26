@@ -63,8 +63,9 @@ const Leistungen: FC<LeistungenProps> = async ({ slice }) => {
                         className="h-8 w-8"
                       />
                     )}
-                    <CardTitle className="text-lg font-bold">
-                      {leistung.data.title}
+                    <CardTitle className="text-2xl font-bold">
+                      {isFilled.keyText(leistung.data.title) &&
+                        leistung.data.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="flex-1">
@@ -74,10 +75,11 @@ const Leistungen: FC<LeistungenProps> = async ({ slice }) => {
                         field={leistung.data.image}
                       />
                     )}
-
-                    <p className="prose prose-slate prose-invert">
-                      {leistung.data.short_description}
-                    </p>
+                    {isFilled.keyText(leistung.data.short_description) && (
+                      <p className="prose prose-slate prose-invert">
+                        {leistung.data.short_description}
+                      </p>
+                    )}
                   </CardContent>
                   <CardFooter>
                     <Button asChild variant="ghost" className="w-full">

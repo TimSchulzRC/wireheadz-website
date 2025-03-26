@@ -311,6 +311,8 @@ export type GameDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<GameDocumentData>, "game", Lang>;
 
 type HomepageDocumentDataSlicesSlice =
+  | RichTextSlice
+  | GamesSlice
   | LeistungenSlice
   | CustomerLogosSlice
   | TextWithImageSlice
@@ -534,6 +536,8 @@ export type LeistungDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | RichTextSlice
+  | GamesSlice
   | CustomerLogosSlice
   | TextWithImageSlice
   | EventsSlice
@@ -762,6 +766,41 @@ type EventsSliceVariation = EventsSliceDefault;
 export type EventsSlice = prismic.SharedSlice<"events", EventsSliceVariation>;
 
 /**
+ * Primary content in *Games → Default → Primary*
+ */
+export interface GamesSliceDefaultPrimary {
+  /**
+   * Title field in *Games → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: games.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *Games → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: games.default.primary.subtitle
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
+
+  /**
+   * Background Color field in *Games → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: games.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"Black" | "Grey">;
+}
+
+/**
  * Default variation for Games Slice
  *
  * - **API ID**: `default`
@@ -770,7 +809,7 @@ export type EventsSlice = prismic.SharedSlice<"events", EventsSliceVariation>;
  */
 export type GamesSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<GamesSliceDefaultPrimary>,
   never
 >;
 
@@ -1030,6 +1069,16 @@ export type TeamSlice = prismic.SharedSlice<"team", TeamSliceVariation>;
  */
 export interface TeamInfoSliceDefaultPrimary {
   /**
+   * Title field in *TeamInfo → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_info.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
    * Content field in *TeamInfo → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -1283,6 +1332,7 @@ declare module "@prismicio/client" {
       EventsSliceVariation,
       EventsSliceDefault,
       GamesSlice,
+      GamesSliceDefaultPrimary,
       GamesSliceVariation,
       GamesSliceDefault,
       LeistungenSlice,

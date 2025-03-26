@@ -61,8 +61,8 @@ export default function EventCard({ event }: { event: Content.EventDocument }) {
       </div>
       <CardHeader>
         <div className="flex justify-between items-start">
-          <CardTitle>
-            {isFilled.keyText(data.title) && <h4>{data.title}</h4>}
+          <CardTitle className="text-2xl">
+            {isFilled.keyText(data.title) && data.title}
           </CardTitle>
         </div>
       </CardHeader>
