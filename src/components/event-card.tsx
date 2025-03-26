@@ -1,9 +1,7 @@
-import { Content } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
-import { PrismicText } from "@prismicio/react";
+import { Content, isFilled } from "@prismicio/client";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import dayjs from "dayjs";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
-import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import {
@@ -15,23 +13,22 @@ import {
 } from "./ui/card";
 
 export default function EventCard({ event }: { event: Content.EventDocument }) {
+  const { data } = event;
   return (
-    <Link
-      href={`/events/${event.uid}`}
-      className="block transition-transform hover:scale-102"
-    >
-      <Card className="flex flex-col overflow-hidden border border-muted pt-0 h-full">
-        <div className="aspect-video overflow-hidden relative">
+    <Card className="flex flex-col overflow-hidden border border-muted pt-0 h-full relative transition-transform hover:scale-102">
+      <div className="aspect-video overflow-hidden relative">
+        {isFilled.image(data.image) && (
           <PrismicNextImage
-            field={event.data.image}
+            field={data.image}
             className="aspect-video h-full w-full object-cover"
           />
+        )}
+        {isFilled.date(data.start) && isFilled.date(data.end) && (
           <div className="absolute top-2 right-2">
             {(() => {
               const now = dayjs();
-              const start = dayjs(event.data.start);
-              const end = dayjs(event.data.end);
-              console.log(now, start, end);
+              const start = dayjs(data.start);
+              const end = dayjs(data.end);
 
               if (now >= start && now <= end) {
                 return (
@@ -60,38 +57,49 @@ export default function EventCard({ event }: { event: Content.EventDocument }) {
               }
             })()}
           </div>
+        )}
+      </div>
+      <CardHeader>
+        <div className="flex justify-between items-start">
+          <CardTitle>
+            {isFilled.keyText(data.title) && <h4>{data.title}</h4>}
+          </CardTitle>
         </div>
-        <CardHeader>
-          <div className="flex justify-between items-start">
-            <CardTitle>
-              <PrismicText field={event.data.title} />
-            </CardTitle>
-          </div>
-        </CardHeader>
-        <CardContent className="flex-1 space-y-2">
+      </CardHeader>
+      <CardContent className="flex-1 space-y-2">
+        {isFilled.date(data.start) && isFilled.date(data.end) && (
           <div className="flex items-center text-sm text-muted-foreground">
             <Calendar className="h-4 w-4 mr-2" />
             <span>
-              {event.data.start === event.data.end
-                ? `${dayjs(event.data.start).format("DD.MM.YYYY")}`
-                : `${dayjs(event.data.start).format("DD.MM.YYYY")} - ${dayjs(event.data.end).format("DD.MM.YYYY")}`}
+              {data.start === data.end
+                ? `${dayjs(data.start).format("DD.MM.YYYY")}`
+                : `${dayjs(data.start).format("DD.MM.YYYY")} - ${dayjs(data.end).format("DD.MM.YYYY")}`}
             </span>
           </div>
+        )}
+        {isFilled.keyText(data.location) && (
           <div className="flex items-center text-sm text-muted-foreground">
             <MapPin className="h-4 w-4 mr-2" />
-            <span>{event.data.location}</span>
+            <span>{data.location}</span>
           </div>
-          <p className="text-muted-foreground mt-2">{event.data.description}</p>
-        </CardContent>
-        <CardFooter>
-          <Button asChild variant="ghost" className="w-full">
-            <div>
-              <span>Details anzeigen</span>
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </div>
-          </Button>
-        </CardFooter>
-      </Card>
-    </Link>
+        )}
+        {isFilled.keyText(data.description) && (
+          <p className="prose prose-slate prose-invert mt-2">
+            {data.description}
+          </p>
+        )}
+      </CardContent>
+      <CardFooter>
+        <Button asChild variant="ghost">
+          <PrismicNextLink
+            document={event}
+            className="w-full after:absolute after:inset-0"
+          >
+            <span>Details anzeigen</span>
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </PrismicNextLink>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

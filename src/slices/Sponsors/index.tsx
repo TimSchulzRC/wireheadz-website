@@ -17,7 +17,7 @@ const CustomerLogos: FC<CustomerLogosProps> = ({ slice }) => {
       >
         <div className="max-w-[90%] mx-auto grid gap-8 justify-items-center">
           {isFilled.richText(slice.primary.title) && (
-            <div className="font-medium text-center">
+            <div className="font-bold text-center">
               <PrismicRichText field={slice.primary.title} />
             </div>
           )}

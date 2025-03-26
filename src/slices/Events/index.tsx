@@ -2,7 +2,7 @@ import EventCard from "@/components/event-card";
 import Section from "@/components/section";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/prismicio";
-import { Content } from "@prismicio/client";
+import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Link from "next/link";
 import { FC } from "react";
@@ -30,13 +30,15 @@ const Events: FC<EventsProps> = async ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <h2 className="w-full text-6xl text-center mb-12">
-        {slice.primary.title}
-      </h2>
-      <h3 className="w-full text-3xl text-center mb-12">
-        {slice.primary.subtitle}
-      </h3>
-      <div className="flex flex-col items-center space-y-12 ">
+      {isFilled.keyText(slice.primary.title) && (
+        <h2 className="w-full font-bold text-center mb-6">
+          {slice.primary.title}
+        </h2>
+      )}
+      {isFilled.keyText(slice.primary.subtitle) && (
+        <h3 className="w-full text-center mb-24">{slice.primary.subtitle}</h3>
+      )}
+      <div className="flex flex-col items-center space-y-12 mt-12">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {events.map((event) => (
             <EventCard key={event.id} event={event} />

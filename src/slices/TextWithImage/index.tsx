@@ -17,43 +17,55 @@ export type TextWithImageProps =
  */
 const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
   return (
-    <Section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
+    <div
+      className={cn(
+        "w-full",
+        slice.primary.inverse_colors ? "bg-muted/50" : "bg-background"
+      )}
     >
-      <div className="bg-muted/50 rounded-lg p-12">
+      <Section
+        data-slice-type={slice.slice_type}
+        data-slice-variation={slice.variation}
+      >
         <div
           className={cn(
-            "flex flex-col gap-24 items-center",
-            slice.variation === "default"
-              ? "md:flex-row"
-              : "md:flex-row-reverse"
+            "rounded-lg p-12",
+            slice.primary.inverse_colors ? "bg-background" : "bg-muted/50"
           )}
         >
-          <div className="md:w-1/2">
-            {isFilled.richText(slice.primary.text) && (
-              <div className="mb-6">
-                <PrismicRichText field={slice.primary.text} />
-              </div>
+          <div
+            className={cn(
+              "flex flex-col gap-24 items-center",
+              slice.variation === "default"
+                ? "md:flex-row"
+                : "md:flex-row-reverse"
             )}
-            {slice.primary.links?.length > 0 &&
-              slice.primary.links.map((item) => (
-                <Button asChild>
-                  <PrismicNextLink field={item}>
-                    Kontakt aufnehmen
-                  </PrismicNextLink>
-                </Button>
-              ))}
-          </div>
-          <div className="md:w-1/2 ">
-            <PrismicNextImage
-              field={slice.primary.image}
-              className="rounded-lg aspect-square object-cover h-full w-full"
-            />
+          >
+            <div className="md:w-1/2">
+              {isFilled.richText(slice.primary.text) && (
+                <div className="mb-6 rtf">
+                  <PrismicRichText field={slice.primary.text} />
+                </div>
+              )}
+              {slice.primary.links?.length > 0 &&
+                slice.primary.links.map((item) => (
+                  <Button asChild key={item.key}>
+                    <PrismicNextLink field={item}>
+                      Kontakt aufnehmen
+                    </PrismicNextLink>
+                  </Button>
+                ))}
+            </div>
+            <div className="md:w-1/2 ">
+              <PrismicNextImage
+                field={slice.primary.image}
+                className="rounded-lg aspect-square object-cover h-full w-full"
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </Section>
+      </Section>
+    </div>
   );
 };
 

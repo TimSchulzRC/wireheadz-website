@@ -13,13 +13,13 @@ interface EventDocumentData {
   /**
    * Title field in *Event*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Text
    * - **Placeholder**: *None*
    * - **API ID Path**: event.title
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  title: prismic.RichTextField;
+  title: prismic.KeyTextField;
 
   /**
    * Description field in *Event*
@@ -199,6 +199,7 @@ export type EventsOverviewPageDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | LeistungenSlice
   | CustomerLogosSlice
   | TextWithImageSlice
   | EventsSlice;
@@ -307,7 +308,11 @@ export type HomepageDocument<Lang extends string = string> =
     Lang
   >;
 
-type LeistungDocumentDataSlicesSlice = never;
+type LeistungDocumentDataSlicesSlice =
+  | RichTextSlice
+  | CustomerLogosSlice
+  | EventsSlice
+  | TextWithImageSlice;
 
 /**
  * Content for Leistung documents
@@ -325,26 +330,37 @@ interface LeistungDocumentData {
   title: prismic.KeyTextField;
 
   /**
-   * Description field in *Leistung*
+   * Short Description field in *Leistung*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: leistung.description
+   * - **API ID Path**: leistung.short_description
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  description: prismic.KeyTextField;
+  short_description: prismic.KeyTextField;
 
   /**
-   * Content field in *Leistung*
+   * Icon field in *Leistung*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: leistung.content
+   * - **API ID Path**: leistung.icon
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   * - **Documentation**: https://prismic.io/docs/field#image
    */
-  content: prismic.RichTextField;
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Image field in *Leistung*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistung.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
 
   /**
    * Slice Zone field in *Leistung*
@@ -405,7 +421,11 @@ export type LeistungDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice = never;
+type PageDocumentDataSlicesSlice =
+  | CustomerLogosSlice
+  | TextWithImageSlice
+  | EventsSlice
+  | LeistungenSlice;
 
 /**
  * Content for Page documents
@@ -589,6 +609,16 @@ export interface EventsSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   subtitle: prismic.KeyTextField;
+
+  /**
+   * Background Color field in *Events → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: events.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"Black" | "Grey">;
 }
 
 /**
@@ -619,6 +649,21 @@ type EventsSliceVariation = EventsSliceDefault;
 export type EventsSlice = prismic.SharedSlice<"events", EventsSliceVariation>;
 
 /**
+ * Item in *Leistungen → Default → Primary → Leistungen*
+ */
+export interface LeistungenSliceDefaultPrimaryLeistungenItem {
+  /**
+   * Leistung field in *Leistungen → Default → Primary → Leistungen*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistungen.default.primary.leistungen[].leistung
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  leistung: prismic.ContentRelationshipField<"page">;
+}
+
+/**
  * Primary content in *Leistungen → Default → Primary*
  */
 export interface LeistungenSliceDefaultPrimary {
@@ -641,6 +686,28 @@ export interface LeistungenSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   subtitle: prismic.KeyTextField;
+
+  /**
+   * Leistungen field in *Leistungen → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistungen.default.primary.leistungen[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  leistungen: prismic.GroupField<
+    Simplify<LeistungenSliceDefaultPrimaryLeistungenItem>
+  >;
+
+  /**
+   * Background Color field in *Leistungen → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistungen.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"Black" | "Grey">;
 }
 
 /**
@@ -671,6 +738,51 @@ type LeistungenSliceVariation = LeistungenSliceDefault;
 export type LeistungenSlice = prismic.SharedSlice<
   "leistungen",
   LeistungenSliceVariation
+>;
+
+/**
+ * Primary content in *RichText → Default → Primary*
+ */
+export interface RichTextSliceDefaultPrimary {
+  /**
+   * Content field in *RichText → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.default.primary.content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for RichText Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RichTextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<RichTextSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *RichText*
+ */
+type RichTextSliceVariation = RichTextSliceDefault;
+
+/**
+ * RichText Shared Slice
+ *
+ * - **API ID**: `rich_text`
+ * - **Description**: RichText
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RichTextSlice = prismic.SharedSlice<
+  "rich_text",
+  RichTextSliceVariation
 >;
 
 /**
@@ -714,6 +826,17 @@ export interface TextWithImageSliceDefaultPrimary {
       "default" | "secondary" | "ghost" | "outline" | "destructive" | "link"
     >
   >;
+
+  /**
+   * Inverse Colors field in *TextWithImage → ImageRight → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: text_with_image.default.primary.inverse_colors
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  inverse_colors: prismic.BooleanField;
 }
 
 /**
@@ -770,6 +893,17 @@ export interface TextWithImageSliceImageLeftPrimary {
       "default" | "secondary" | "ghost" | "outline" | "destructive" | "link"
     >
   >;
+
+  /**
+   * Inverse Colors field in *TextWithImage → ImageLeft → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: text_with_image.imageLeft.primary.inverse_colors
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  inverse_colors: prismic.BooleanField;
 }
 
 /**
@@ -851,9 +985,14 @@ declare module "@prismicio/client" {
       EventsSliceVariation,
       EventsSliceDefault,
       LeistungenSlice,
+      LeistungenSliceDefaultPrimaryLeistungenItem,
       LeistungenSliceDefaultPrimary,
       LeistungenSliceVariation,
       LeistungenSliceDefault,
+      RichTextSlice,
+      RichTextSliceDefaultPrimary,
+      RichTextSliceVariation,
+      RichTextSliceDefault,
       TextWithImageSlice,
       TextWithImageSliceDefaultPrimary,
       TextWithImageSliceImageLeftPrimary,

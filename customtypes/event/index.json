@@ -14,12 +14,10 @@
         }
       },
       "title": {
-        "type": "StructuredText",
+        "type": "Text",
         "config": {
           "label": "Title",
-          "placeholder": "",
-          "allowTargetBlank": false,
-          "single": "heading1,strong,em,rtl"
+          "placeholder": ""
         }
       },
       "description": {

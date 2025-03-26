@@ -25,6 +25,17 @@
             "label": "Subtitle",
             "placeholder": ""
           }
+        },
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "Black",
+              "Grey"
+            ]
+          }
         }
       },
       "items": {}

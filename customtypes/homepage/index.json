@@ -44,6 +44,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "leistungen": {
+              "type": "SharedSlice"
+            },
             "customer_logos": {
               "type": "SharedSlice"
             },

@@ -26,13 +26,14 @@
     "tw-animate-css": "^1.2.4"
   },
   "devDependencies": {
-    "@slicemachine/adapter-next": "^0.3.71",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "slice-machine-ui": "^2.14.1",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@slicemachine/adapter-next": "^0.3.72",
+    "@tailwindcss/postcss": "^4.0.17",
+    "@tailwindcss/typography": "^0.5.16",
+    "@types/node": "^20.17.27",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "slice-machine-ui": "^2.14.2",
+    "tailwindcss": "^4.0.17",
+    "typescript": "^5.8.2"
   }
 }

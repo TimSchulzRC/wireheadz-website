@@ -6,5 +6,6 @@ export const components = {
   customer_logos: dynamic(() => import("./Sponsors")),
   events: dynamic(() => import("./Events")),
   leistungen: dynamic(() => import("./Leistungen")),
+  rich_text: dynamic(() => import("./RichText")),
   text_with_image: dynamic(() => import("./TextWithImage")),
 };

@@ -25,6 +25,37 @@
             "label": "Subtitle",
             "placeholder": ""
           }
+        },
+        "leistungen": {
+          "type": "Group",
+          "config": {
+            "label": "Leistungen",
+            "repeat": true,
+            "fields": {
+              "leistung": {
+                "type": "Link",
+                "config": {
+                  "label": "Leistung",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "page"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "background_color": {
+          "type": "Select",
+          "config": {
+            "label": "Background Color",
+            "placeholder": "",
+            "options": [
+              "Black",
+              "Grey"
+            ]
+          }
         }
       },
       "items": {}

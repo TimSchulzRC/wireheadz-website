@@ -47,6 +47,15 @@
               "link"
             ]
           }
+        },
+        "inverse_colors": {
+          "type": "Boolean",
+          "config": {
+            "label": "Inverse Colors",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}
@@ -93,6 +102,15 @@
               "destructive",
               "link"
             ]
+          }
+        },
+        "inverse_colors": {
+          "type": "Boolean",
+          "config": {
+            "label": "Inverse Colors",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
           }
         }
       },

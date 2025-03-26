@@ -22,6 +22,11 @@
 				"__TYPE__": "FieldContent",
 				"value": "eat",
 				"type": "Text"
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Grey",
+				"type": "Select"
 			}
 		},
 		"items": []

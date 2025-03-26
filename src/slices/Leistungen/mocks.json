@@ -12,6 +12,32 @@
 				"__TYPE__": "FieldContent",
 				"value": "ill",
 				"type": "Text"
+			},
+			"leistungen": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"leistung",
+								{
+									"key": "8bb3a0f1-769c-43a7-a878-971b6aa0426f",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "Grey",
+				"type": "Select"
 			}
 		},
 		"items": []

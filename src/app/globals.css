@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -102,31 +103,34 @@ p {
 }
 
 h1 {
-  @apply text-4xl;
-  margin-bottom: 1rem;
+  @apply text-7xl;
 }
 
 h2 {
-  @apply text-3xl;
-  margin-bottom: 1rem;
+  @apply text-5xl;
 }
 
 h3 {
-  @apply text-2xl;
-  margin-bottom: 1rem;
+  @apply text-3xl;
 }
 
 h4 {
-  @apply text-xl;
-  margin-bottom: 1rem;
+  @apply text-2xl;
 }
 
 h5 {
   @apply text-lg;
-  margin-bottom: 1rem;
 }
 
 h6 {
   @apply text-base;
-  margin-bottom: 1rem;
+}
+
+.rtf h1,
+.rtf h2,
+.rtf h3,
+.rtf h4,
+.rtf h5,
+.rtf h6 {
+  @apply mb-6;
 }
