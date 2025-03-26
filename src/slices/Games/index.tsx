@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -65,6 +66,9 @@ const Games: FC<GamesProps> = async ({ slice }) => {
                   <CardTitle className="text-2xl font-bold">
                     {game.data.game}
                   </CardTitle>
+                  <CardDescription className="text-muted-foreground">
+                    {game.data.title}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1">
                   <div className="aspect-video overflow-hidden rounded-lg bg-muted">

@@ -8,29 +8,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { Content } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const mainNav = [
-  { name: "Startseite", href: "/" },
-  { name: "Spiele", href: "/spiele" },
-  { name: "News", href: "/news" },
-  { name: "Events", href: "/events" },
-];
+const mainNav = [{ name: "Events", href: "/events" }];
 
-const leistungenNav = [
-  { name: "Leistungen", href: "/leistungen" },
-  { name: "Lehre", href: "/leistungen/lehre" },
-  { name: "Forschung", href: "/leistungen/forschung" },
-  {
-    name: "Unternehmenskooperation",
-    href: "/leistungen/unternehmenskooperation",
-  },
-];
-
-export default function Navigation() {
+export default function Navigation({
+  games,
+  leistungen,
+}: {
+  games: Content.GameDocument[];
+  leistungen: Content.LeistungDocument[];
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -66,6 +59,36 @@ export default function Navigation() {
                   variant="link"
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-primary p-0",
+                    pathname.includes("/games")
+                      ? "text-primary"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  Games
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {games.map((item) => (
+                  <DropdownMenuItem key={item.href} asChild>
+                    <PrismicNextLink
+                      document={item}
+                      className={cn(
+                        "w-full",
+                        pathname === item.href && "font-medium text-primary"
+                      )}
+                    >
+                      {item.data.game}
+                    </PrismicNextLink>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="link"
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-primary p-0",
                     pathname.includes("/leistungen")
                       ? "text-primary"
                       : "text-muted-foreground"
@@ -75,17 +98,17 @@ export default function Navigation() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
-                {leistungenNav.map((item) => (
+                {leistungen.map((item) => (
                   <DropdownMenuItem key={item.href} asChild>
-                    <Link
-                      href={item.href}
+                    <PrismicNextLink
+                      document={item}
                       className={cn(
                         "w-full",
                         pathname === item.href && "font-medium text-primary"
                       )}
                     >
-                      {item.name}
-                    </Link>
+                      {item.data.title}
+                    </PrismicNextLink>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -126,14 +149,11 @@ export default function Navigation() {
               </Link>
             ))}
             <div className="pt-2">
-              <p className="text-sm font-medium text-muted-foreground mb-2">
-                Leistungen
-              </p>
               <div className="flex flex-col space-y-2 pl-4">
-                {leistungenNav.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
+                {leistungen.map((item) => (
+                  <PrismicNextLink
+                    key={item.id}
+                    document={item}
                     className={cn(
                       "text-sm font-medium transition-colors hover:text-primary",
                       pathname === item.href
@@ -142,8 +162,8 @@ export default function Navigation() {
                     )}
                     onClick={() => setIsOpen(false)}
                   >
-                    {item.name}
-                  </Link>
+                    {item.data.title}
+                  </PrismicNextLink>
                 ))}
               </div>
             </div>
