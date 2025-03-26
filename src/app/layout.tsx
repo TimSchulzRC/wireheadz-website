@@ -28,7 +28,7 @@ export default async function RootLayout({
   const leistungen = await client.getAllByType("leistung");
   const games = await client.getAllByType("game");
   return (
-    <html lang="en" className="dark">
+    <html lang="de" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background min-h-screen`}
       >

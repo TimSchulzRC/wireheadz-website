@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
           <div className="absolute bottom-0 left-0 p-6 md:p-8">
             <Badge className="mb-2 bg-secondary text-secondary-foreground">
-              {data.title}
+              {data.game}
             </Badge>
             {isFilled.keyText(data.title) && (
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-2 uppercase text-shadow-glow">
