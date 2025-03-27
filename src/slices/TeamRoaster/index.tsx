@@ -50,7 +50,7 @@ const Team: FC<TeamProps> = ({ slice }) => {
                       )}
                     </div>
                     <div>
-                      {isFilled.keyText(player.gamer_tag) && (
+                      {isFilled.keyText(player.lieblings_agent) && (
                         <>
                           <p className="text-muted-foreground">
                             Lieblingsagents
