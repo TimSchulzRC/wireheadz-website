@@ -12,6 +12,13 @@
           "label": "UID"
         }
       },
+      "index": {
+        "type": "Number",
+        "config": {
+          "label": "Index",
+          "placeholder": ""
+        }
+      },
       "title": {
         "type": "Text",
         "config": {

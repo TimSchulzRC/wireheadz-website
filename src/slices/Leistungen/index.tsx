@@ -25,7 +25,12 @@ export type LeistungenProps = SliceComponentProps<Content.LeistungenSlice>;
  */
 const Leistungen: FC<LeistungenProps> = async ({ slice }) => {
   const client = createClient();
-  const leistungen = await client.getAllByType("leistung");
+  const leistungen = await client.getAllByType("leistung", {
+    orderings: {
+      field: "my.leistung.index",
+      direction: "asc",
+    },
+  });
 
   return (
     <div

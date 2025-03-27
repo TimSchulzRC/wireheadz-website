@@ -396,6 +396,17 @@ type LeistungDocumentDataSlicesSlice =
  */
 interface LeistungDocumentData {
   /**
+   * Index field in *Leistung*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: leistung.index
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  index: prismic.NumberField;
+
+  /**
    * Title field in *Leistung*
    *
    * - **Field Type**: Text
@@ -1306,11 +1317,11 @@ export type RichTextSlice = prismic.SharedSlice<
 >;
 
 /**
- * Item in *TeamRoaster → Default → Primary → Players*
+ * Item in *TeamRoaster → Valorant → Primary → Players*
  */
 export interface TeamSliceDefaultPrimaryPlayersItem {
   /**
-   * Portrait field in *TeamRoaster → Default → Primary → Players*
+   * Portrait field in *TeamRoaster → Valorant → Primary → Players*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
@@ -1320,7 +1331,7 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
   image: prismic.ImageField<never>;
 
   /**
-   * Name field in *TeamRoaster → Default → Primary → Players*
+   * Name field in *TeamRoaster → Valorant → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1330,7 +1341,7 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
   name: prismic.KeyTextField;
 
   /**
-   * Gamer Tag field in *TeamRoaster → Default → Primary → Players*
+   * Gamer Tag field in *TeamRoaster → Valorant → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1340,7 +1351,7 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
   gamer_tag: prismic.KeyTextField;
 
   /**
-   * Studienfach field in *TeamRoaster → Default → Primary → Players*
+   * Studienfach field in *TeamRoaster → Valorant → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1350,7 +1361,7 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
   studienfach: prismic.KeyTextField;
 
   /**
-   * Peak Rank field in *TeamRoaster → Default → Primary → Players*
+   * Peak Rank field in *TeamRoaster → Valorant → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1360,7 +1371,7 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
   peak_rank: prismic.KeyTextField;
 
   /**
-   * Lieblings Agent field in *TeamRoaster → Default → Primary → Players*
+   * Lieblings Agent field in *TeamRoaster → Valorant → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1370,7 +1381,7 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
   lieblings_agent: prismic.KeyTextField;
 
   /**
-   * Zitat field in *TeamRoaster → Default → Primary → Players*
+   * Zitat field in *TeamRoaster → Valorant → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1380,7 +1391,7 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
   zitat: prismic.KeyTextField;
 
   /**
-   * Role field in *TeamRoaster → Default → Primary → Players*
+   * Role field in *TeamRoaster → Valorant → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1391,11 +1402,86 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
 }
 
 /**
- * Primary content in *TeamRoaster → Default → Primary*
+ * Item in *TeamRoaster → Rocket League → Primary → Players*
+ */
+export interface TeamSliceRocketLeaguePrimaryPlayersItem {
+  /**
+   * Portrait field in *TeamRoaster → Rocket League → Primary → Players*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.rocketLeague.primary.players[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Name field in *TeamRoaster → Rocket League → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.rocketLeague.primary.players[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Gamer Tag field in *TeamRoaster → Rocket League → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.rocketLeague.primary.players[].gamer_tag
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  gamer_tag: prismic.KeyTextField;
+
+  /**
+   * Studienfach field in *TeamRoaster → Rocket League → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.rocketLeague.primary.players[].studienfach
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  studienfach: prismic.KeyTextField;
+
+  /**
+   * Peak Rank field in *TeamRoaster → Rocket League → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.rocketLeague.primary.players[].peak_rank
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  peak_rank: prismic.KeyTextField;
+
+  /**
+   * Zitat field in *TeamRoaster → Rocket League → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.rocketLeague.primary.players[].zitat
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  zitat: prismic.KeyTextField;
+
+  /**
+   * Role field in *TeamRoaster → Rocket League → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.rocketLeague.primary.players[].role
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  role: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *TeamRoaster → Valorant → Primary*
  */
 export interface TeamSliceDefaultPrimary {
   /**
-   * Players field in *TeamRoaster → Default → Primary*
+   * Players field in *TeamRoaster → Valorant → Primary*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
@@ -1406,7 +1492,7 @@ export interface TeamSliceDefaultPrimary {
 }
 
 /**
- * Default variation for TeamRoaster Slice
+ * Valorant variation for TeamRoaster Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -1419,9 +1505,39 @@ export type TeamSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *TeamRoaster → Rocket League → Primary*
+ */
+export interface TeamSliceRocketLeaguePrimary {
+  /**
+   * Players field in *TeamRoaster → Rocket League → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.rocketLeague.primary.players[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  players: prismic.GroupField<
+    Simplify<TeamSliceRocketLeaguePrimaryPlayersItem>
+  >;
+}
+
+/**
+ * Rocket League variation for TeamRoaster Slice
+ *
+ * - **API ID**: `rocketLeague`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSliceRocketLeague = prismic.SharedSliceVariation<
+  "rocketLeague",
+  Simplify<TeamSliceRocketLeaguePrimary>,
+  never
+>;
+
+/**
  * Slice variation for *TeamRoaster*
  */
-type TeamSliceVariation = TeamSliceDefault;
+type TeamSliceVariation = TeamSliceDefault | TeamSliceRocketLeague;
 
 /**
  * TeamRoaster Shared Slice
@@ -1752,8 +1868,11 @@ declare module "@prismicio/client" {
       TeamSlice,
       TeamSliceDefaultPrimaryPlayersItem,
       TeamSliceDefaultPrimary,
+      TeamSliceRocketLeaguePrimaryPlayersItem,
+      TeamSliceRocketLeaguePrimary,
       TeamSliceVariation,
       TeamSliceDefault,
+      TeamSliceRocketLeague,
       TeamInfoSlice,
       TeamInfoSliceDefaultPrimary,
       TeamInfoSliceVariation,
