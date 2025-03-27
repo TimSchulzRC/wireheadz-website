@@ -43,7 +43,7 @@ const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
           >
             <div className="md:w-1/2">
               {isFilled.richText(slice.primary.text) && (
-                <div className="mb-6 rtf">
+                <div className="mb-6 rtf prose prose-slate prose-invert text-balance">
                   <PrismicRichText field={slice.primary.text} />
                 </div>
               )}
@@ -62,7 +62,12 @@ const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
             <div className="md:w-1/2 ">
               <PrismicNextImage
                 field={slice.primary.image}
-                className="rounded-lg aspect-square object-cover h-full w-full"
+                className={cn(
+                  "rounded-lg object-cover h-full w-full",
+                  slice.primary.image_aspect_ratio === "1:1"
+                    ? "aspect-square"
+                    : "aspect-video"
+                )}
               />
             </div>
           </div>

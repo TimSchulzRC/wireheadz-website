@@ -6,6 +6,7 @@ export const components = {
   customer_logos: dynamic(() => import("./Sponsors")),
   events: dynamic(() => import("./Events")),
   games: dynamic(() => import("./Games")),
+  info_grid: dynamic(() => import("./InfoGrid")),
   leistungen: dynamic(() => import("./Leistungen")),
   rich_text: dynamic(() => import("./RichText")),
   team: dynamic(() => import("./TeamRoaster")),

@@ -56,6 +56,11 @@
 			"inverse_colors": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"image_aspect_ratio": {
+				"__TYPE__": "FieldContent",
+				"value": "16:9",
+				"type": "Select"
 			}
 		},
 		"items": []
@@ -117,6 +122,11 @@
 			"inverse_colors": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"image_aspect_ratio": {
+				"__TYPE__": "FieldContent",
+				"value": "1:1",
+				"type": "Select"
 			}
 		},
 		"items": [

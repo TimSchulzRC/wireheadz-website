@@ -44,6 +44,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "info_grid": {
+              "type": "SharedSlice"
+            },
             "rich_text": {
               "type": "SharedSlice"
             },

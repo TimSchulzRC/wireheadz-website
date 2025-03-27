@@ -29,6 +29,17 @@
             "thumbnails": []
           }
         },
+        "image_aspect_ratio": {
+          "type": "Select",
+          "config": {
+            "label": "Image Aspect Ratio",
+            "placeholder": "",
+            "options": [
+              "1:1",
+              "16:9"
+            ]
+          }
+        },
         "links": {
           "type": "Link",
           "config": {
@@ -83,6 +94,17 @@
             "label": "Image",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "image_aspect_ratio": {
+          "type": "Select",
+          "config": {
+            "label": "Image Aspect Ratio",
+            "placeholder": "",
+            "options": [
+              "1:1",
+              "16:9"
+            ]
           }
         },
         "links": {

@@ -34,7 +34,7 @@ const Games: FC<GamesProps> = async ({ slice }) => {
         "w-full",
         slice.primary.background_color === "Black"
           ? "bg-background"
-          : "bg-muted/50"
+          : "bg-muted/50 py-1"
       )}
     >
       <Section
