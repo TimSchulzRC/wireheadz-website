@@ -32,16 +32,13 @@ export default function EventCard({ event }: { event: Content.EventDocument }) {
 
               if (now >= start && now <= end) {
                 return (
-                  <Badge
-                    variant="destructive"
-                    className="bg-red-500 text-white"
-                  >
+                  <Badge variant="default" className="text-white">
                     Laufend
                   </Badge>
                 );
               } else if (now < start) {
                 return (
-                  <Badge variant="secondary" className="bg-blue-500 text-white">
+                  <Badge variant="secondary" className="text-background">
                     Kommend
                   </Badge>
                 );
