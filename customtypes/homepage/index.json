@@ -6,44 +6,17 @@
   "format": "page",
   "json": {
     "Main": {
-      "title": {
-        "type": "Text",
-        "config": {
-          "label": "Title",
-          "placeholder": "WireHeadZ Games Hub"
-        }
-      },
-      "subtitle": {
-        "type": "Text",
-        "config": {
-          "label": "Subtitle",
-          "placeholder": "WHZ eSports ist mehr als nur Gaming."
-        }
-      },
-      "links": {
-        "type": "Link",
-        "config": {
-          "label": "Links",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true,
-          "variants": [
-            "link",
-            "secondary",
-            "destructive",
-            "outline",
-            "ghost",
-            "default"
-          ]
-        }
-      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "contact_form": {
+              "type": "SharedSlice"
+            },
+            "hero": {
+              "type": "SharedSlice"
+            },
             "info_grid": {
               "type": "SharedSlice"
             },

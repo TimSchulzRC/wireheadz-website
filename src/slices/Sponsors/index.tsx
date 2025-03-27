@@ -9,7 +9,7 @@ export type CustomerLogosProps =
 
 const CustomerLogos: FC<CustomerLogosProps> = ({ slice }) => {
   return (
-    <div className="bg-muted/50 w-full">
+    <div className="bg-muted/50 w-full py-1">
       <Section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}

@@ -3,9 +3,11 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  contact_form: dynamic(() => import("./ContactForm")),
   customer_logos: dynamic(() => import("./Sponsors")),
   events: dynamic(() => import("./Events")),
   games: dynamic(() => import("./Games")),
+  hero: dynamic(() => import("./Hero")),
   info_grid: dynamic(() => import("./InfoGrid")),
   leistungen: dynamic(() => import("./Leistungen")),
   rich_text: dynamic(() => import("./RichText")),
