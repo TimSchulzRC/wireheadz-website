@@ -23,6 +23,7 @@ const routes: Route[] = [
   { type: "homepage", path: "/" },
   { type: "page", path: "/:uid" },
   { type: "leistung", path: "/leistungen/:uid" },
+  { type: "events_overview_page", path: "/events" },
   { type: "event", path: "/events/:uid" },
   { type: "game", path: "/games/:uid" },
 ];

@@ -27,12 +27,13 @@ export default async function RootLayout({
   const client = createClient();
   const leistungen = await client.getAllByType("leistung");
   const games = await client.getAllByType("game");
+  const settings = await client.getSingle("settings");
   return (
     <html lang="de" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background min-h-screen`}
       >
-        <Navigation games={games} leistungen={leistungen} />
+        <Navigation games={games} leistungen={leistungen} settings={settings} />
         <main className="">{children}</main>
       </body>
     </html>

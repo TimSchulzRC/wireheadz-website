@@ -8,21 +8,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Content } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
+import { asLink, Content, isFilled } from "@prismicio/client";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const mainNav = [{ name: "Events", href: "/events" }];
-
 export default function Navigation({
   games,
   leistungen,
+  settings,
 }: {
   games: Content.GameDocument[];
   leistungen: Content.LeistungDocument[];
+  settings: Content.SettingsDocument;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
@@ -30,36 +30,40 @@ export default function Navigation({
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center">
-        <div className="mr-4 flex">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              WireHeadZ
-            </span>
-          </Link>
-        </div>
+        {isFilled.image(settings.data.logo) && (
+          <div className="mr-4 flex h-full">
+            <Link href="/" className="flex items-center space-x-2 h-full py-2">
+              <PrismicNextImage
+                field={settings.data.logo}
+                className="h-full w-auto"
+              />
+            </Link>
+          </div>
+        )}
         <div className="hidden md:flex md:flex-1 md:items-center md:justify-between">
           <nav className="flex items-center space-x-6">
-            {mainNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {settings.data.navigation.map(
+              (item) =>
+                isFilled.link(item) && (
+                  <PrismicNextLink
+                    key={item.key}
+                    field={item}
+                    className={cn(
+                      "text-sm font-medium transition-colors hover:text-primary",
+                      pathname === asLink(item)
+                        ? "text-primary"
+                        : "text-muted-foreground"
+                    )}
+                  />
+                )
+            )}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="link"
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-primary p-0",
-                    pathname.includes("/games")
+                    pathname.startsWith("/games")
                       ? "text-primary"
                       : "text-muted-foreground"
                   )}
@@ -89,7 +93,7 @@ export default function Navigation({
                   variant="link"
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-primary p-0",
-                    pathname.includes("/leistungen")
+                    pathname.startsWith("/leistungen")
                       ? "text-primary"
                       : "text-muted-foreground"
                   )}
@@ -115,8 +119,19 @@ export default function Navigation({
             </DropdownMenu>
           </nav>
           <div className="flex items-center space-x-2">
-            <Button variant="secondary">Anmelden</Button>
-            <Button>Beitreten</Button>
+            {settings.data.buttons.map(
+              (item) =>
+                isFilled.link(item) && (
+                  <Button
+                    key={item.key}
+                    variant={item.variant}
+                    className="w-full"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.text}
+                  </Button>
+                )
+            )}
           </div>
         </div>
         <div className="flex flex-1 items-center justify-end md:hidden">
@@ -131,24 +146,46 @@ export default function Navigation({
         </div>
       </div>
       {isOpen && (
-        <div className="container pb-4 md:hidden">
+        <div className="container pb-4 px-6 md:hidden">
           <nav className="flex flex-col space-y-3">
-            {mainNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === item.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {settings.data.navigation.map(
+              (item) =>
+                isFilled.link(item) && (
+                  <PrismicNextLink
+                    key={item.key}
+                    field={item}
+                    className={cn(
+                      "text-sm font-medium transition-colors hover:text-primary",
+                      pathname === asLink(item)
+                        ? "text-primary"
+                        : "text-muted-foreground"
+                    )}
+                    onClick={() => setIsOpen(false)}
+                  />
+                )
+            )}
             <div className="pt-2">
+              <div className="mb-2 font-medium text-sm">Games</div>
+              <div className="flex flex-col space-y-2 pl-4">
+                {games.map((item) => (
+                  <PrismicNextLink
+                    key={item.id}
+                    document={item}
+                    className={cn(
+                      "text-sm font-medium transition-colors hover:text-primary",
+                      pathname === item.href
+                        ? "text-primary"
+                        : "text-muted-foreground"
+                    )}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.data.game}
+                  </PrismicNextLink>
+                ))}
+              </div>
+            </div>
+            <div className="pt-2">
+              <div className="mb-2 font-medium text-sm">Leistungen</div>
               <div className="flex flex-col space-y-2 pl-4">
                 {leistungen.map((item) => (
                   <PrismicNextLink
@@ -168,8 +205,19 @@ export default function Navigation({
               </div>
             </div>
             <div className="flex flex-col space-y-2 pt-2">
-              <Button variant="secondary">Anmelden</Button>
-              <Button>Beitreten</Button>
+              {settings.data.buttons.map(
+                (item) =>
+                  isFilled.link(item) && (
+                    <Button
+                      key={item.key}
+                      variant={item.variant}
+                      className="w-full"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.text}
+                    </Button>
+                  )
+              )}
             </div>
           </nav>
         </div>

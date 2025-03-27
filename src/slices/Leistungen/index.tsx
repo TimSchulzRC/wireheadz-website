@@ -63,7 +63,7 @@ const Leistungen: FC<LeistungenProps> = async ({ slice }) => {
                         className="h-8 w-8"
                       />
                     )}
-                    <CardTitle className="text-2xl font-bold">
+                    <CardTitle className="text-xl font-bold">
                       {isFilled.keyText(leistung.data.title) &&
                         leistung.data.title}
                     </CardTitle>
