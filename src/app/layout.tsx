@@ -1,5 +1,4 @@
-import Navigation from "@/components/navigation";
-import { createClient } from "@/prismicio";
+import Header from "@/components/Header";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -24,16 +23,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const client = createClient();
-  const leistungen = await client.getAllByType("leistung");
-  const games = await client.getAllByType("game");
-  const settings = await client.getSingle("settings");
   return (
     <html lang="de" className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background min-h-screen`}
       >
-        <Navigation games={games} leistungen={leistungen} settings={settings} />
+        <Header />
         <main className="">{children}</main>
       </body>
     </html>
