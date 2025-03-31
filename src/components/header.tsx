@@ -1,6 +1,8 @@
 import { createClient } from "@/prismicio";
 import Navigation from "./navigation";
 
+export const revalidate = 60;
+
 export default async function Header() {
   const client = createClient();
   const leistungen = await client.getAllByType("leistung");
