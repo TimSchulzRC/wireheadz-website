@@ -1,8 +1,6 @@
 import { createClient } from "@/prismicio";
 import Navigation from "./navigation";
 
-export const dynamic = "force-dynamic";
-
 export default async function Header() {
   const client = createClient();
   const leistungen = await client.getAllByType("leistung");
