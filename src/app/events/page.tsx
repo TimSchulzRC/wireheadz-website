@@ -1,3 +1,5 @@
+export const revalidate = 0; // Refetch data every 60 seconds (1 minute)
+
 import EventCard from "@/components/event-card";
 import { createClient } from "@/prismicio";
 import { isFilled } from "@prismicio/client";
