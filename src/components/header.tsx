@@ -1,7 +1,7 @@
 import { createClient } from "@/prismicio";
 import Navigation from "./navigation";
 
-export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export default async function Header() {
   const client = createClient();
