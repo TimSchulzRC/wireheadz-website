@@ -15,7 +15,7 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 const Hero: FC<HeroProps> = ({ slice }) => {
   return (
     <section
-      className="w-full py-12 md:py-24 lg:py-32 relative overflow-hidden"
+      className="w-full pt-24 lg:pt-32 mb-24 lg:mb-32 relative overflow-hidden"
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >

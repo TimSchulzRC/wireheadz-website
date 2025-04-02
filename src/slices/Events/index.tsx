@@ -55,7 +55,7 @@ const Events: FC<EventsProps> = async ({ slice }) => {
           </div>
           <div className="flex justify-center">
             <Button asChild variant="outline">
-              <Link href="/events">Alle News anzeigen</Link>
+              <Link href="/events">Alle Events anzeigen</Link>
             </Button>
           </div>
         </div>
