@@ -1090,6 +1090,52 @@ export interface InfoGridSlice2ColumnsPrimaryElementsItem {
 }
 
 /**
+ * Item in *InfoGrid → 4 Columns → Primary → Elements*
+ */
+export interface InfoGridSlice4ColumnsPrimaryElementsItem {
+  /**
+   * Title field in *InfoGrid → 4 Columns → Primary → Elements*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info_grid.4Columns.primary.elements[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Content field in *InfoGrid → 4 Columns → Primary → Elements*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info_grid.4Columns.primary.elements[].content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+
+  /**
+   * Icon field in *InfoGrid → 4 Columns → Primary → Elements*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info_grid.4Columns.primary.elements[].icon
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Full Width field in *InfoGrid → 4 Columns → Primary → Elements*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: info_grid.4Columns.primary.elements[].full_width
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  full_width: prismic.BooleanField;
+}
+
+/**
  * Primary content in *InfoGrid → 3 Columns → Primary*
  */
 export interface InfoGridSliceDefaultPrimary {
@@ -1190,9 +1236,62 @@ export type InfoGridSlice2Columns = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *InfoGrid → 4 Columns → Primary*
+ */
+export interface InfoGridSlice4ColumnsPrimary {
+  /**
+   * Title field in *InfoGrid → 4 Columns → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info_grid.4Columns.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Elements field in *InfoGrid → 4 Columns → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info_grid.4Columns.primary.elements[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  elements: prismic.GroupField<
+    Simplify<InfoGridSlice4ColumnsPrimaryElementsItem>
+  >;
+
+  /**
+   * Background Color field in *InfoGrid → 4 Columns → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: info_grid.4Columns.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  background_color: prismic.SelectField<"Black" | "Grey">;
+}
+
+/**
+ * 4 Columns variation for InfoGrid Slice
+ *
+ * - **API ID**: `4Columns`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type InfoGridSlice4Columns = prismic.SharedSliceVariation<
+  "4Columns",
+  Simplify<InfoGridSlice4ColumnsPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *InfoGrid*
  */
-type InfoGridSliceVariation = InfoGridSliceDefault | InfoGridSlice2Columns;
+type InfoGridSliceVariation =
+  | InfoGridSliceDefault
+  | InfoGridSlice2Columns
+  | InfoGridSlice4Columns;
 
 /**
  * InfoGrid Shared Slice
@@ -1749,9 +1848,12 @@ declare module "@prismicio/client" {
       InfoGridSliceDefaultPrimary,
       InfoGridSlice2ColumnsPrimaryElementsItem,
       InfoGridSlice2ColumnsPrimary,
+      InfoGridSlice4ColumnsPrimaryElementsItem,
+      InfoGridSlice4ColumnsPrimary,
       InfoGridSliceVariation,
       InfoGridSliceDefault,
       InfoGridSlice2Columns,
+      InfoGridSlice4Columns,
       LeistungenSlice,
       LeistungenSliceDefaultPrimary,
       LeistungenSliceVariation,

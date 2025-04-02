@@ -34,7 +34,9 @@ const InfoGrid: FC<InfoGridProps> = ({ slice }) => {
         <div
           className={cn(
             "grid sm:grid-cols-2 gap-6",
-            slice.variation === "2Columns" ? "md:grid-cols-2" : "md:grid-cols-3"
+            slice.variation === "default" && "md:grid-cols-3",
+            slice.variation === "2Columns" && "md:grid-cols-2",
+            slice.variation === "4Columns" && "md:grid-cols-4"
           )}
         >
           {slice.primary.elements.map((item, index) => (

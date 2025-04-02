@@ -23,7 +23,7 @@ const Events: FC<EventsProps> = async ({ slice }) => {
       field: "my.event.end",
       direction: "desc",
     },
-    pageSize: 3,
+    limit: 3,
   });
 
   return (
