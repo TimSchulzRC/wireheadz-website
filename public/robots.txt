@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.whzesports.de/
+
+# Sitemaps
+Sitemap: https://www.whzesports.de/sitemap.xml
