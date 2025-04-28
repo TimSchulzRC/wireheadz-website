@@ -1,3 +1,4 @@
+import Contact from "@/components/contact-form";
 import Section from "@/components/section";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
@@ -71,13 +72,13 @@ const ContactForm: FC<ContactFormProps> = ({ slice }) => {
               </div>
             </div>
           </div>
-          {/* 
+
           <div className="bg-muted/20 p-6 md:p-8 rounded-lg border border-muted/50">
             <h3 className="text-xl font-bold uppercase mb-6">
               Schreib uns eine Nachricht
             </h3>
             <Contact />
-          </div> */}
+          </div>
         </div>
       </div>
     </Section>
