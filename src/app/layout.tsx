@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import { repositoryName } from "@/prismicio";
 import { PrismicPreview } from "@prismicio/next";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -34,6 +35,7 @@ export default async function RootLayout({
         <Header />
         <main className="">{children}</main>
         <Analytics />
+        <SpeedInsights />
       </body>
       <PrismicPreview repositoryName={repositoryName} />
     </html>
