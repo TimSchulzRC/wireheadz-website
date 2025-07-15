@@ -3,22 +3,28 @@ import { SliceZone } from "@prismicio/react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import LocalesSetter from "@/components/locales-setter";
 import Section from "@/components/section";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import { getLocales } from "@/utils/getLocales";
 import { PrismicNextImage } from "@prismicio/next";
 
-type Params = { uid: string };
+type Params = { uid: string; lang: string };
 
 export default async function Page({ params }: { params: Promise<Params> }) {
-  const { uid } = await params;
+  const { uid, lang } = await params;
   const client = createClient();
+  const page = await client
+    .getByUID("leistung", uid, { lang })
+    .catch(() => notFound());
   const {
     data: { image, title, slices, short_description, icon },
-  } = await client.getByUID("leistung", uid).catch(() => notFound());
+  } = page;
+  const locales = await getLocales(page, client);
 
   return (
-    <>
+    <LocalesSetter locales={locales}>
       <Section>
         <h2 className="text-primary  !text-2xl">Leistung</h2>
         <hr className="my-3" />
@@ -47,7 +53,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
         <hr />
       </Section>
       <SliceZone slices={slices} components={components} />
-    </>
+    </LocalesSetter>
   );
 }
 
@@ -56,9 +62,11 @@ export async function generateMetadata({
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { uid } = await params;
+  const { uid, lang } = await params;
   const client = createClient();
-  const page = await client.getByUID("leistung", uid).catch(() => notFound());
+  const page = await client
+    .getByUID("leistung", uid, { lang })
+    .catch(() => notFound());
 
   return {
     title: page.data.meta_title,
@@ -71,7 +79,7 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const client = createClient();
-  const pages = await client.getAllByType("leistung");
+  const pages = await client.getAllByType("leistung", { lang: "*" });
 
   return pages.map((page) => ({ uid: page.uid }));
 }
