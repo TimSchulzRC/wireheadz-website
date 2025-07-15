@@ -21,10 +21,10 @@ const ContactForm: FC<ContactFormProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
     >
       <div className="container px-4 md:px-6">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
             <div className="bg-muted/30 p-6 rounded-lg space-y-6">
-              <h3 className="text-xl font-bold uppercase">
+              <h3 className="text-xl font-bold uppercase hyphens-auto">
                 Kontaktinformationen
               </h3>
 

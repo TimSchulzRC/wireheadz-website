@@ -12,7 +12,7 @@ import { asLink, Content, isFilled } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useState } from "react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLocales } from "./locales-wrapper";
@@ -29,13 +29,17 @@ export default function Navigation({
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [locales] = useLocales();
+  const { lang } = useParams<{ lang: string }>();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center">
         {isFilled.image(settings.data.logo) && (
           <div className="mr-4 flex h-full">
-            <Link href="/" className="flex items-center space-x-2 h-full py-2">
+            <Link
+              href={"/" + lang}
+              className="flex items-center space-x-2 h-full py-2"
+            >
               <PrismicNextImage
                 field={settings.data.logo}
                 className="h-full w-auto"
@@ -72,6 +76,7 @@ export default function Navigation({
                   )}
                 >
                   Games
+                  {/* // TODO: Internationalization */}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
@@ -102,6 +107,7 @@ export default function Navigation({
                   )}
                 >
                   Leistungen
+                  {/* // TODO: Internationalization bzw. dropdowns übers cms*/}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">
