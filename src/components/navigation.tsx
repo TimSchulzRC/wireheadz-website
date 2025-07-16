@@ -230,7 +230,7 @@ export default function Navigation({
               )}
             </div>
           </nav>
-          <LanguageSwitcher locales={locales} />
+          {/* <LanguageSwitcher locales={locales} /> */}
         </div>
       )}
     </header>
