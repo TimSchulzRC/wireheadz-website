@@ -35,7 +35,7 @@ const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
         >
           <div
             className={cn(
-              "flex flex-col gap-24 items-center",
+              "flex gap-24 items-center flex-col-reverse",
               slice.variation === "default"
                 ? "md:flex-row"
                 : "md:flex-row-reverse"
@@ -51,7 +51,7 @@ const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
                 slice.primary.links.map(
                   (item) =>
                     isFilled.link(item) && (
-                      <Button asChild key={item.key}>
+                      <Button asChild key={item.key} variant={item.variant}>
                         <PrismicNextLink field={item}>
                           {item.text}
                         </PrismicNextLink>
