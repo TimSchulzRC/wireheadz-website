@@ -31,6 +31,8 @@ export default function Navigation({
   const [locales] = useLocales();
   const { lang } = useParams<{ lang: string }>();
 
+  console.log(settings.data.navigation);
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center">
@@ -49,83 +51,55 @@ export default function Navigation({
         )}
         <div className="hidden md:flex md:flex-1 md:items-center md:justify-between">
           <nav className="flex items-center space-x-6">
-            {settings.data.navigation.map(
-              (item) =>
-                isFilled.link(item) && (
+            {settings.data.navigation.map((navItem) =>
+              navItem.navigation_item?.length === 1 ? (
+                isFilled.link(navItem.navigation_item[0]) && (
                   <PrismicNextLink
-                    key={item.key}
-                    field={item}
+                    key={navItem.navigation_item[0].key}
+                    field={navItem.navigation_item[0]}
                     className={cn(
                       "text-sm font-medium transition-colors hover:text-primary",
-                      pathname === asLink(item)
+                      pathname === asLink(navItem.navigation_item[0])
                         ? "text-primary"
                         : "text-muted-foreground"
                     )}
                   />
                 )
+              ) : (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="link"
+                      className={cn(
+                        "text-sm font-medium transition-colors hover:text-primary p-0",
+                        pathname.startsWith("/games")
+                          ? "text-primary"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      {navItem.label}
+                      {/* // TODO: Internationalization */}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    {navItem.navigation_item.map(
+                      (item) =>
+                        isFilled.link(item) && (
+                          <DropdownMenuItem key={item.key} asChild>
+                            <PrismicNextLink
+                              field={item}
+                              className={cn(
+                                "w-full"
+                                // pathname === item. && "font-medium text-primary"
+                              )}
+                            />
+                          </DropdownMenuItem>
+                        )
+                    )}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )
             )}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="link"
-                  className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary p-0",
-                    pathname.startsWith("/games")
-                      ? "text-primary"
-                      : "text-muted-foreground"
-                  )}
-                >
-                  Games
-                  {/* // TODO: Internationalization */}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {games.map((item) => (
-                  <DropdownMenuItem key={item.href} asChild>
-                    <PrismicNextLink
-                      document={item}
-                      className={cn(
-                        "w-full",
-                        pathname === item.href && "font-medium text-primary"
-                      )}
-                    >
-                      {item.data.game}
-                    </PrismicNextLink>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="link"
-                  className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary p-0",
-                    pathname.startsWith("/leistungen")
-                      ? "text-primary"
-                      : "text-muted-foreground"
-                  )}
-                >
-                  Leistungen
-                  {/* // TODO: Internationalization bzw. dropdowns übers cms*/}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {leistungen.map((item) => (
-                  <DropdownMenuItem key={item.href} asChild>
-                    <PrismicNextLink
-                      document={item}
-                      className={cn(
-                        "w-full",
-                        pathname === item.href && "font-medium text-primary"
-                      )}
-                    >
-                      {item.data.title}
-                    </PrismicNextLink>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
           </nav>
           <div className="flex items-center space-x-2">
             {settings.data.buttons.map(
@@ -158,7 +132,7 @@ export default function Navigation({
       {isOpen && (
         <div className="container pb-4 px-6 md:hidden">
           <nav className="flex flex-col space-y-3">
-            {settings.data.navigation.map(
+            {/* {settings.data.navigation.map(
               (item) =>
                 isFilled.link(item) && (
                   <PrismicNextLink
@@ -173,7 +147,7 @@ export default function Navigation({
                     onClick={() => setIsOpen(false)}
                   />
                 )
-            )}
+            )} */}
             <div className="pt-2">
               <div className="mb-2 font-medium text-sm">Games</div>
               <div className="flex flex-col space-y-2 pl-4">

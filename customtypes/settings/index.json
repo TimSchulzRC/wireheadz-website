@@ -14,17 +14,6 @@
           "thumbnails": []
         }
       },
-      "navigation": {
-        "type": "Link",
-        "config": {
-          "label": "Navigation",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true
-        }
-      },
       "buttons": {
         "type": "Link",
         "config": {
@@ -35,6 +24,33 @@
           "allowText": true,
           "repeat": true,
           "variants": ["default", "secondary"]
+        }
+      },
+      "navigation": {
+        "type": "Group",
+        "config": {
+          "label": "Navigation",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "Menu Label",
+                "placeholder": ""
+              }
+            },
+            "navigation_item": {
+              "type": "Link",
+              "config": {
+                "label": "Navigation Item",
+                "placeholder": "",
+                "select": null,
+                "allowTargetBlank": true,
+                "allowText": true,
+                "repeat": true
+              }
+            }
+          }
         }
       }
     }
