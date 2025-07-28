@@ -1,4 +1,5 @@
 import Contact from "@/components/contact-form";
+import LocalizedText from "@/components/localized-text";
 import Section from "@/components/section";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
@@ -25,7 +26,10 @@ const ContactForm: FC<ContactFormProps> = ({ slice }) => {
           <div className="space-y-8">
             <div className="bg-muted/30 p-6 rounded-lg space-y-6">
               <h3 className="text-xl font-bold uppercase hyphens-auto">
-                Kontaktinformationen
+                <LocalizedText
+                  english="Contact Information"
+                  german="Kontaktinformationen"
+                />
               </h3>
 
               <div className="space-y-4">
@@ -43,7 +47,9 @@ const ContactForm: FC<ContactFormProps> = ({ slice }) => {
                   <div className="flex items-start">
                     <Phone className="h-5 w-5 text-secondary mr-3 mt-0.5" />
                     <div>
-                      <p className="font-medium">Telefon</p>
+                      <p className="font-medium">
+                        <LocalizedText english="Phone" german="Telefon" />
+                      </p>
                       <p className="text-muted-foreground">{telefon}</p>
                     </div>
                   </div>
@@ -52,7 +58,9 @@ const ContactForm: FC<ContactFormProps> = ({ slice }) => {
                   <div className="flex items-start">
                     <MapPin className="h-5 w-5 text-primary mr-3 mt-0.5" />
                     <div>
-                      <p className="font-medium">Adresse</p>
+                      <p className="font-medium">
+                        <LocalizedText english="Address" german="Adresse" />
+                      </p>
                       <p className="text-muted-foreground">{addresse}</p>
                     </div>
                   </div>
@@ -75,7 +83,7 @@ const ContactForm: FC<ContactFormProps> = ({ slice }) => {
 
           <div className="bg-muted/20 p-6 md:p-8 rounded-lg border border-muted/50">
             <h3 className="text-xl font-bold uppercase mb-6">
-              Schreib uns eine Nachricht
+              <LocalizedText english="Get in Touch" german="Schreib uns" />
             </h3>
             <Contact />
           </div>

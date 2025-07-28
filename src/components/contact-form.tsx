@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { AlertCircle, CheckCircle, Loader2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
+import LocalizedText from "./localized-text";
 
 interface ContactFormProps {
   className?: string;
@@ -54,16 +55,26 @@ export default function ContactForm({ className }: ContactFormProps) {
       {formState.success ? (
         <Alert className="bg-primary/10 border-primary mb-6">
           <CheckCircle className="h-5 w-5 text-primary" />
-          <AlertTitle className="text-primary">Nachricht gesendet!</AlertTitle>
+          <AlertTitle className="text-primary">
+            <LocalizedText
+              english="Message sent!"
+              german="Nachricht gesendet!"
+            />
+          </AlertTitle>
           <AlertDescription>{formState.message}</AlertDescription>
           <Button className="mt-4" onClick={() => setFormState({})}>
-            Neue Nachricht senden
+            <LocalizedText
+              english="Send new message"
+              german="Neue Nachricht senden"
+            />
           </Button>
         </Alert>
       ) : (
         <form ref={formRef} action={clientAction} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">
+              <LocalizedText english="Name" german="Name" />
+            </Label>
             <Input
               id="name"
               name="name"
@@ -83,7 +94,7 @@ export default function ContactForm({ className }: ContactFormProps) {
               id="email"
               name="email"
               type="email"
-              placeholder="deine.email@beispiel.de"
+              placeholder="email@domain.com"
               className={formState.errors?.email ? "border-destructive" : ""}
             />
             {formState.errors?.email && (
@@ -94,7 +105,9 @@ export default function ContactForm({ className }: ContactFormProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="subject">Betreff</Label>
+            <Label htmlFor="subject">
+              <LocalizedText english="Subject" german="Betreff" />
+            </Label>
             <Input
               id="subject"
               name="subject"
@@ -109,11 +122,13 @@ export default function ContactForm({ className }: ContactFormProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="message">Nachricht</Label>
+            <Label htmlFor="message">
+              <LocalizedText english="Message" german="Nachricht" />
+            </Label>
             <Textarea
               id="message"
               name="message"
-              placeholder="Deine Nachricht an uns..."
+              placeholder="..."
               rows={6}
               className={formState.errors?.message ? "border-destructive" : ""}
             />
@@ -127,7 +142,9 @@ export default function ContactForm({ className }: ContactFormProps) {
           {formState.message && !formState.success && (
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Fehler</AlertTitle>
+              <AlertTitle>
+                <LocalizedText english="Error" german="Fehler" />
+              </AlertTitle>
               <AlertDescription>{formState.message}</AlertDescription>
             </Alert>
           )}
