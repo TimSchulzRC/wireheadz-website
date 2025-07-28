@@ -1460,24 +1460,44 @@ export interface TeamSliceDefaultPrimaryPlayersItem {
   studienfach: prismic.KeyTextField;
 
   /**
-   * Peak Rank field in *TeamRoaster → Default → Primary → Players*
+   * Info 1 Label field in *TeamRoaster → Default → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: team.default.primary.players[].peak_rank
+   * - **API ID Path**: team.default.primary.players[].info_1_label
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  peak_rank: prismic.KeyTextField;
+  info_1_label: prismic.KeyTextField;
 
   /**
-   * Lieblings Agent field in *TeamRoaster → Default → Primary → Players*
+   * Info 1 field in *TeamRoaster → Default → Primary → Players*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: team.default.primary.players[].lieblings_agent
+   * - **API ID Path**: team.default.primary.players[].info_1
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  lieblings_agent: prismic.KeyTextField;
+  info_1: prismic.KeyTextField;
+
+  /**
+   * Info 2 Label field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].info_2_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  info_2_label: prismic.KeyTextField;
+
+  /**
+   * Info 2 field in *TeamRoaster → Default → Primary → Players*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.players[].info_2
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  info_2: prismic.KeyTextField;
 
   /**
    * Zitat field in *TeamRoaster → Default → Primary → Players*

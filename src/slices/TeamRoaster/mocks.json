@@ -60,22 +60,6 @@
 								}
 							],
 							[
-								"peak_rank",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "knife",
-									"type": "Text"
-								}
-							],
-							[
-								"lieblings_agent",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "not",
-									"type": "Text"
-								}
-							],
-							[
 								"zitat",
 								{
 									"__TYPE__": "FieldContent",
@@ -88,6 +72,38 @@
 								{
 									"__TYPE__": "FieldContent",
 									"value": "food",
+									"type": "Text"
+								}
+							],
+							[
+								"info_1_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "throat",
+									"type": "Text"
+								}
+							],
+							[
+								"info_2_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "moon",
+									"type": "Text"
+								}
+							],
+							[
+								"info_1",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "act",
+									"type": "Text"
+								}
+							],
+							[
+								"info_2",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "younger",
 									"type": "Text"
 								}
 							]

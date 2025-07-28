@@ -2,6 +2,7 @@ import { Content, isFilled } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import dayjs from "dayjs";
 import { ArrowRight, Calendar, MapPin } from "lucide-react";
+import LocalizedText from "./localized-text";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import {
@@ -33,13 +34,13 @@ export default function EventCard({ event }: { event: Content.EventDocument }) {
               if (now >= start && now <= end) {
                 return (
                   <Badge variant="default" className="text-white">
-                    Laufend
+                    <LocalizedText english="Ongoing" german="Laufend" />
                   </Badge>
                 );
               } else if (now < start) {
                 return (
                   <Badge variant="secondary" className="text-background">
-                    Kommend
+                    <LocalizedText english="Upcoming" german="Kommend" />
                   </Badge>
                 );
               } else {
@@ -48,7 +49,7 @@ export default function EventCard({ event }: { event: Content.EventDocument }) {
                     variant="outline"
                     className="bg-gray-300 text-gray-700"
                   >
-                    Vergangen
+                    <LocalizedText english="Previous" german="Vergangen" />
                   </Badge>
                 );
               }
@@ -92,7 +93,7 @@ export default function EventCard({ event }: { event: Content.EventDocument }) {
             document={event}
             className="w-full after:absolute after:inset-0"
           >
-            <span>Details anzeigen</span>
+            <LocalizedText english="View Details" german="Details anzeigen" />
             <ArrowRight className="ml-2 h-4 w-4" />
           </PrismicNextLink>
         </Button>

@@ -1,4 +1,5 @@
 import EventCard from "@/components/event-card";
+import LocalizedText from "@/components/localized-text";
 import Section from "@/components/section";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -55,7 +56,12 @@ const Events: FC<EventsProps> = async ({ slice }) => {
           </div>
           <div className="flex justify-center">
             <Button asChild variant="outline">
-              <Link href="/events">Alle Events anzeigen</Link>
+              <Link href="/events">
+                <LocalizedText
+                  english="View All Events"
+                  german="Alle Events anzeigen"
+                />
+              </Link>
             </Button>
           </div>
         </div>

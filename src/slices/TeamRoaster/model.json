@@ -47,17 +47,31 @@
                   "placeholder": ""
                 }
               },
-              "peak_rank": {
+              "info_1_label": {
                 "type": "Text",
                 "config": {
-                  "label": "Peak Rank",
+                  "label": "Info 1 Label",
                   "placeholder": ""
                 }
               },
-              "lieblings_agent": {
+              "info_1": {
                 "type": "Text",
                 "config": {
-                  "label": "Lieblings Agent",
+                  "label": "Info 1",
+                  "placeholder": ""
+                }
+              },
+              "info_2_label": {
+                "type": "Text",
+                "config": {
+                  "label": "Info 2 Label",
+                  "placeholder": ""
+                }
+              },
+              "info_2": {
+                "type": "Text",
+                "config": {
+                  "label": "Info 2",
                   "placeholder": ""
                 }
               },

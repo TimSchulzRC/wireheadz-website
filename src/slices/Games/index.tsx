@@ -1,3 +1,4 @@
+import LocalizedText from "@/components/localized-text";
 import Section from "@/components/section";
 import { Button } from "@/components/ui/button";
 import {
@@ -84,7 +85,10 @@ const Games: FC<GamesProps> = async ({ slice }) => {
                       document={game}
                       className="after:absolute after:inset-0"
                     >
-                      <span>Team ansehen</span>
+                      <LocalizedText
+                        english="View Team"
+                        german="Team ansehen"
+                      />
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </PrismicNextLink>
                   </Button>

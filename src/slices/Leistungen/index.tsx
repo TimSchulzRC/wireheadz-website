@@ -1,3 +1,4 @@
+import LocalizedText from "@/components/localized-text";
 import Section from "@/components/section";
 import { Button } from "@/components/ui/button";
 import {
@@ -93,7 +94,10 @@ const Leistungen: FC<LeistungenProps> = async ({ slice }) => {
                         key={leistung.id}
                         className="after:absolute after:inset-0"
                       >
-                        <span>Mehr erfahren</span>
+                        <LocalizedText
+                          english="View Details"
+                          german="Mehr erfahren"
+                        />
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </PrismicNextLink>
                     </Button>

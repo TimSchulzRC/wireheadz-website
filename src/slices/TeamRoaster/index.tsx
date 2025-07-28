@@ -1,3 +1,4 @@
+import LocalizedText from "@/components/localized-text";
 import Section from "@/components/section";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -42,27 +43,34 @@ const Team: FC<TeamProps> = ({ slice }) => {
                 <div className="p-4 w-full">
                   <div className="grid grid-cols-2 gap-6 text-sm">
                     <div>
-                      {isFilled.keyText(player.peak_rank) && (
+                      {isFilled.keyText(player.info_1) && (
                         <>
-                          <p className="text-muted-foreground">Peak Rank</p>
-                          <p className="font-bold">{player.peak_rank}</p>
+                          <p className="text-muted-foreground">
+                            {player.info_1_label}
+                          </p>
+                          <p className="font-bold">{player.info_1}</p>
                         </>
                       )}
                     </div>
                     <div>
-                      {isFilled.keyText(player.lieblings_agent) && (
+                      {isFilled.keyText(player.info_2) && (
                         <>
-                          <p className="text-muted-foreground">
-                            Lieblingsagents
+                          <p className="text-muted-foregrou nd">
+                            {player.info_2_label}
                           </p>
-                          <p className="font-bold">{player.lieblings_agent}</p>
+                          <p className="font-bold">{player.info_2}</p>
                         </>
                       )}
                     </div>
                     <div>
                       {isFilled.keyText(player.studienfach) && (
                         <>
-                          <p className="text-muted-foreground">Studienfach</p>
+                          <p className="text-muted-foreground">
+                            <LocalizedText
+                              english="Field of Study"
+                              german="Studienfach"
+                            />
+                          </p>
                           <p className="font-bold">{player.studienfach}</p>
                         </>
                       )}
@@ -87,9 +95,6 @@ const Team: FC<TeamProps> = ({ slice }) => {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">
-                Lieblingsagent: {player.lieblings_agent}
-              </p>
               <div>
                 {isFilled.keyText(player.zitat) && (
                   <p className="font-bold border-l-2 ps-6">„{player.zitat}“</p>

@@ -14,6 +14,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { useState } from "react";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLocales } from "./locales-wrapper";
 
 export default function Navigation({
@@ -141,7 +142,7 @@ export default function Navigation({
                 )
             )}
           </div>
-          {/* <LanguageSwitcher locales={locales} /> */}
+          <LanguageSwitcher locales={locales} />
         </div>
         <div className="flex flex-1 items-center justify-end md:hidden">
           <Button
@@ -229,7 +230,7 @@ export default function Navigation({
               )}
             </div>
           </nav>
-          {/* <LanguageSwitcher locales={locales} /> */}
+          <LanguageSwitcher locales={locales} />
         </div>
       )}
     </header>
