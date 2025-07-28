@@ -18,20 +18,14 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLocales } from "./locales-wrapper";
 
 export default function Navigation({
-  games,
-  leistungen,
   settings,
 }: {
-  games: Content.GameDocument[];
-  leistungen: Content.LeistungDocument[];
   settings: Content.SettingsDocument;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const [locales] = useLocales();
   const { lang } = useParams<{ lang: string }>();
-
-  console.log(settings.data.navigation);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -51,7 +45,7 @@ export default function Navigation({
         )}
         <div className="hidden md:flex md:flex-1 md:items-center md:justify-between">
           <nav className="flex items-center space-x-6">
-            {settings.data.navigation.map((navItem) =>
+            {settings.data.navigation?.map((navItem) =>
               navItem.navigation_item?.length === 1 ? (
                 isFilled.link(navItem.navigation_item[0]) && (
                   <PrismicNextLink
@@ -72,26 +66,20 @@ export default function Navigation({
                       variant="link"
                       className={cn(
                         "text-sm font-medium transition-colors hover:text-primary p-0",
-                        pathname.startsWith("/games")
-                          ? "text-primary"
-                          : "text-muted-foreground"
+                        "text-muted-foreground"
                       )}
                     >
                       {navItem.label}
-                      {/* // TODO: Internationalization */}
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="start">
-                    {navItem.navigation_item.map(
+                    {navItem.navigation_item?.map(
                       (item) =>
                         isFilled.link(item) && (
                           <DropdownMenuItem key={item.key} asChild>
                             <PrismicNextLink
                               field={item}
-                              className={cn(
-                                "w-full"
-                                // pathname === item. && "font-medium text-primary"
-                              )}
+                              className={cn("w-full")}
                             />
                           </DropdownMenuItem>
                         )
@@ -132,62 +120,41 @@ export default function Navigation({
       {isOpen && (
         <div className="container pb-4 px-6 md:hidden">
           <nav className="flex flex-col space-y-3">
-            {/* {settings.data.navigation.map(
-              (item) =>
-                isFilled.link(item) && (
+            {settings.data.navigation?.map((navItem) =>
+              navItem.navigation_item?.length === 1 ? (
+                isFilled.link(navItem.navigation_item[0]) && (
                   <PrismicNextLink
-                    key={item.key}
-                    field={item}
+                    key={navItem.navigation_item[0].key}
+                    field={navItem.navigation_item[0]}
                     className={cn(
                       "text-sm font-medium transition-colors hover:text-primary",
-                      pathname === asLink(item)
+                      pathname === asLink(navItem.navigation_item[0])
                         ? "text-primary"
                         : "text-muted-foreground"
                     )}
-                    onClick={() => setIsOpen(false)}
                   />
                 )
-            )} */}
-            <div className="pt-2">
-              <div className="mb-2 font-medium text-sm">Games</div>
-              <div className="flex flex-col space-y-2 pl-4">
-                {games.map((item) => (
-                  <PrismicNextLink
-                    key={item.id}
-                    document={item}
-                    className={cn(
-                      "text-sm font-medium transition-colors hover:text-primary",
-                      pathname === item.href
-                        ? "text-primary"
-                        : "text-muted-foreground"
-                    )}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.data.game}
-                  </PrismicNextLink>
-                ))}
-              </div>
-            </div>
-            <div className="pt-2">
-              <div className="mb-2 font-medium text-sm">Leistungen</div>
-              <div className="flex flex-col space-y-2 pl-4">
-                {leistungen.map((item) => (
-                  <PrismicNextLink
-                    key={item.id}
-                    document={item}
-                    className={cn(
-                      "text-sm font-medium transition-colors hover:text-primary",
-                      pathname === item.href
-                        ? "text-primary"
-                        : "text-muted-foreground"
-                    )}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.data.title}
-                  </PrismicNextLink>
-                ))}
-              </div>
-            </div>
+              ) : (
+                <div className="pt-2">
+                  <div className="mb-2 font-medium text-sm">
+                    {navItem.label}
+                  </div>
+                  <div className="flex flex-col space-y-2 pl-4">
+                    {navItem.navigation_item?.map((item) => (
+                      <PrismicNextLink
+                        key={item.key}
+                        field={item}
+                        className={cn(
+                          "text-sm font-medium transition-colors hover:text-primary",
+                          "text-muted-foreground"
+                        )}
+                        onClick={() => setIsOpen(false)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )
+            )}
             <div className="flex flex-col space-y-2 pt-2">
               {settings.data.buttons.map(
                 (item) =>
