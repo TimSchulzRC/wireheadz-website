@@ -21,7 +21,7 @@ const ContactForm: FC<ContactFormProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="container px-4 md:px-6">
+      <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
             <div className="bg-muted/30 p-6 rounded-lg space-y-6">

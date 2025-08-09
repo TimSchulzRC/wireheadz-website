@@ -29,7 +29,7 @@ export default function Navigation({
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 items-center">
+      <div className="container mx-auto flex h-16 items-center px-6 md:px-12">
         {isFilled.image(settings.data.logo) && (
           <div className="mr-4 flex h-full">
             <Link
@@ -45,7 +45,7 @@ export default function Navigation({
         )}
         <div className="hidden md:flex md:flex-1 md:items-center md:justify-between">
           <nav className="flex items-center space-x-6">
-            {settings.data.navigation?.map((navItem) =>
+            {settings.data.navigation?.map((navItem, index) =>
               navItem.navigation_item?.length === 1 ? (
                 isFilled.link(navItem.navigation_item[0]) && (
                   <PrismicNextLink
@@ -60,7 +60,7 @@ export default function Navigation({
                   />
                 )
               ) : (
-                <DropdownMenu>
+                <DropdownMenu key={`${index}-${navItem.label}`}>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="link"

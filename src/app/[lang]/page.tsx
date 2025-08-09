@@ -21,7 +21,7 @@ export default async function Page({
   const locales = await getLocales(page, client);
   return (
     <LocalesSetter locales={locales}>
-      <SliceZone slices={page.data.slices} components={components} />;
+      <SliceZone slices={page.data.slices} components={components} />
     </LocalesSetter>
   );
 }

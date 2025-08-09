@@ -725,6 +725,19 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
   navigation: prismic.GroupField<Simplify<SettingsDocumentDataNavigationItem>>;
+
+  /**
+   * Footer Links field in *Settings*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.footer_links
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  footer_links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
 }
 
 /**

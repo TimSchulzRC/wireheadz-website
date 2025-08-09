@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import LocalesWrapper from "@/components/locales-wrapper";
 import { repositoryName } from "@/prismicio";
@@ -39,6 +40,7 @@ export default async function RootLayout({
         <LocalesWrapper>
           <Header lang={lang} />
           <main className="">{children}</main>
+          <Footer lang={lang} />
           <Analytics />
           <SpeedInsights />
         </LocalesWrapper>
