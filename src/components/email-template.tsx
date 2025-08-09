@@ -23,7 +23,12 @@ export default function EmailTemplate({ name, email, message }: Props) {
         <p style={{ whiteSpace: "pre-wrap" }}>{message}</p>
       </div>
       <hr />
-      <p>Diese E-Mail wurde über das Kontaktformular Ihrer Website gesendet.</p>
+      <p>
+        {" "}
+        <em>
+          Diese E-Mail wurde über das Kontaktformular Ihrer Website gesendet.
+        </em>
+      </p>
     </div>
   );
 }

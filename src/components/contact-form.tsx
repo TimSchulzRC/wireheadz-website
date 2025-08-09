@@ -6,53 +6,65 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, CheckCircle, Loader2 } from "lucide-react";
-import { useRef, useState } from "react";
-import { useFormStatus } from "react-dom";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import LocalizedText from "./localized-text";
 
 interface ContactFormProps {
   className?: string;
 }
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
+const schema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name muss mindestens 2 Zeichen lang sein" }),
+  email: z.string().email({ message: "Ungültige E-Mail-Adresse" }),
+  subject: z
+    .string()
+    .min(5, { message: "Betreff muss mindestens 5 Zeichen lang sein" }),
+  message: z
+    .string()
+    .min(10, { message: "Nachricht muss mindestens 10 Zeichen lang sein" }),
+});
 
-  return (
-    <Button type="submit" className="w-full" size="lg" disabled={pending}>
-      {pending ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Wird gesendet...
-        </>
-      ) : (
-        "Nachricht senden"
-      )}
-    </Button>
-  );
-}
+type FormValues = z.infer<typeof schema>;
 
 export default function ContactForm({ className }: ContactFormProps) {
-  const [formState, setFormState] = useState<{
-    errors?: Record<string, string[]>;
-    success?: boolean;
-    message?: string;
-  }>({});
-  const formRef = useRef<HTMLFormElement>(null);
+  const [serverMessage, setServerMessage] = useState<string | undefined>();
+  const [sent, setSent] = useState<boolean>(false);
 
-  async function clientAction(formData: FormData) {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({
+    resolver: zodResolver(schema),
+    mode: "onTouched",
+  });
+
+  const onSubmit = async (values: FormValues) => {
+    setServerMessage(undefined);
+    setSent(false);
+    const formData = new FormData();
+    formData.set("name", values.name);
+    formData.set("email", values.email);
+    formData.set("subject", values.subject);
+    formData.set("message", values.message);
     const result = await sendEmail(formData);
-
-    setFormState(result);
-
-    if (result.success && formRef.current) {
-      formRef.current.reset();
+    setServerMessage(result.message);
+    setSent(!!result.success);
+    if (result.success) {
+      reset();
     }
-  }
+  };
 
   return (
     <div className={className}>
-      {formState.success ? (
+      {sent ? (
         <Alert className="bg-primary/10 border-primary mb-6">
           <CheckCircle className="h-5 w-5 text-primary" />
           <AlertTitle className="text-primary">
@@ -61,30 +73,36 @@ export default function ContactForm({ className }: ContactFormProps) {
               german="Nachricht gesendet!"
             />
           </AlertTitle>
-          <AlertDescription>{formState.message}</AlertDescription>
-          <Button className="mt-4" onClick={() => setFormState({})}>
-            <LocalizedText
-              english="Send new message"
-              german="Neue Nachricht senden"
-            />
-          </Button>
+          <AlertDescription>{serverMessage}</AlertDescription>
+          <div>
+            <Button
+              className="mt-4"
+              onClick={() => {
+                setSent(false);
+                setServerMessage(undefined);
+              }}
+            >
+              <LocalizedText
+                english="Send new message"
+                german="Neue Nachricht senden"
+              />
+            </Button>
+          </div>
         </Alert>
       ) : (
-        <form ref={formRef} action={clientAction} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="name">
               <LocalizedText english="Name" german="Name" />
             </Label>
             <Input
               id="name"
-              name="name"
               placeholder="Dein Name"
-              className={formState.errors?.name ? "border-destructive" : ""}
+              {...register("name")}
+              className={errors.name ? "border-destructive" : ""}
             />
-            {formState.errors?.name && (
-              <p className="text-sm text-destructive">
-                {formState.errors.name[0]}
-              </p>
+            {errors.name && (
+              <p className="text-sm text-destructive">{errors.name.message}</p>
             )}
           </div>
 
@@ -92,15 +110,13 @@ export default function ContactForm({ className }: ContactFormProps) {
             <Label htmlFor="email">E-Mail</Label>
             <Input
               id="email"
-              name="email"
               type="email"
               placeholder="email@domain.com"
-              className={formState.errors?.email ? "border-destructive" : ""}
+              {...register("email")}
+              className={errors.email ? "border-destructive" : ""}
             />
-            {formState.errors?.email && (
-              <p className="text-sm text-destructive">
-                {formState.errors.email[0]}
-              </p>
+            {errors.email && (
+              <p className="text-sm text-destructive">{errors.email.message}</p>
             )}
           </div>
 
@@ -110,13 +126,13 @@ export default function ContactForm({ className }: ContactFormProps) {
             </Label>
             <Input
               id="subject"
-              name="subject"
               placeholder="Worum geht es?"
-              className={formState.errors?.subject ? "border-destructive" : ""}
+              {...register("subject")}
+              className={errors.subject ? "border-destructive" : ""}
             />
-            {formState.errors?.subject && (
+            {errors.subject && (
               <p className="text-sm text-destructive">
-                {formState.errors.subject[0]}
+                {errors.subject.message}
               </p>
             )}
           </div>
@@ -127,29 +143,43 @@ export default function ContactForm({ className }: ContactFormProps) {
             </Label>
             <Textarea
               id="message"
-              name="message"
               placeholder="..."
               rows={6}
-              className={formState.errors?.message ? "border-destructive" : ""}
+              {...register("message")}
+              className={errors.message ? "border-destructive" : ""}
             />
-            {formState.errors?.message && (
+            {errors.message && (
               <p className="text-sm text-destructive">
-                {formState.errors.message[0]}
+                {errors.message.message}
               </p>
             )}
           </div>
 
-          {formState.message && !formState.success && (
+          {serverMessage && !sent && (
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>
                 <LocalizedText english="Error" german="Fehler" />
               </AlertTitle>
-              <AlertDescription>{formState.message}</AlertDescription>
+              <AlertDescription>{serverMessage}</AlertDescription>
             </Alert>
           )}
 
-          <SubmitButton />
+          <Button
+            type="submit"
+            className="w-full"
+            size="lg"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Wird gesendet...
+              </>
+            ) : (
+              "Nachricht senden"
+            )}
+          </Button>
         </form>
       )}
     </div>

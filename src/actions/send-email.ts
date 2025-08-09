@@ -42,8 +42,8 @@ export async function sendEmail(formData: FormData) {
   const { name, email, subject, message } = validatedFields.data;
 
   try {
-    const { data, error } = await resend.emails.send({
-      from: "esports@fh-zwickau.de",
+    const { error } = await resend.emails.send({
+      from: "kontaktformular@whzesports.de",
       to: ["esports@fh-zwickau.de"],
       subject: subject,
       react: EmailTemplate({ name, email, message }),
