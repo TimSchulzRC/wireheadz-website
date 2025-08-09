@@ -47,17 +47,19 @@ const TextWithImage: FC<TextWithImageProps> = async ({ slice }) => {
                   <PrismicRichText field={slice.primary.text} />
                 </div>
               )}
-              {slice.primary.links?.length > 0 &&
-                slice.primary.links.map(
-                  (item) =>
-                    isFilled.link(item) && (
-                      <Button asChild key={item.key} variant={item.variant}>
-                        <PrismicNextLink field={item}>
-                          {item.text}
-                        </PrismicNextLink>
-                      </Button>
-                    )
-                )}
+              <div className="flex flex-wrap gap-3">
+                {slice.primary.links?.length > 0 &&
+                  slice.primary.links.map(
+                    (item) =>
+                      isFilled.link(item) && (
+                        <Button asChild key={item.key} variant={item.variant}>
+                          <PrismicNextLink field={item}>
+                            {item.text}
+                          </PrismicNextLink>
+                        </Button>
+                      )
+                  )}
+              </div>
             </div>
             <div className="md:w-1/2 ">
               <PrismicNextImage
